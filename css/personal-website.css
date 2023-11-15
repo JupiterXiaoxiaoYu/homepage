@@ -192,7 +192,8 @@ hr, .page-header {
 }
 
 .account {
-    margin: 5px;
+    margin: 7px;
+    margin-bottom: 5px;
 }
 
 .other-account-icon {
