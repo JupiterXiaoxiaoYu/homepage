@@ -1,0 +1,275 @@
+/*!
+ * Start Bootstrap - Modern Business HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Global Styles */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.img-portfolio {
+    margin-bottom: 30px;
+}
+
+.img-hover:hover {
+    opacity: 0.8;
+}
+
+/* Home Page Carousel */
+
+header.carousel {
+    height: 50%;
+}
+
+header.carousel .item,
+header.carousel .item.active,
+header.carousel .carousel-inner {
+    height: 100%;
+}
+
+header.carousel .fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+/* 404 Page Styles */
+
+.error-404 {
+    font-size: 100px;
+}
+
+/* Pricing Page Styles */
+
+.price {
+    display: block;
+    font-size: 50px;
+    line-height: 50px;
+}
+
+.price sup {
+    top: -20px;
+    left: 2px;
+    font-size: 20px;
+}
+
+.period {
+    display: block;
+    font-style: italic;
+}
+
+/* Footer Styles */
+
+footer {
+    margin: 50px 0;
+}
+
+/* Responsive Styles */
+
+@media(max-width:991px) {
+    .customer-img,
+    .img-related {
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width:767px) {
+    .img-portfolio {
+        margin-bottom: 15px;
+    }
+
+    header.carousel .carousel {
+        height: 70%;
+    }
+}
+
+
+/* Custom Styles */
+body {
+    background-color: #F6F4EE;
+    background-size: 100%;
+}
+
+hr, .page-header {
+    border-color: #A3A3A3;
+}
+
+.avatar-image {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 100%;
+    background: #f0f0f0;
+}
+
+.avatar-image-smaller {
+    width: 40px;
+    height: 40px;
+}
+
+.avatar-image-bigger {
+    width: 250px;
+    height: 250px;
+    margin: 20px;
+}
+
+.center-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-img {
+    padding: 5px 10px 0 5px;
+    height: 100%;
+}
+
+#my-name {
+    padding-top: 16px;
+}
+
+.pub-title {
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.company-title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.profile-name {
+    text-align: center;
+}
+
+.about-me-content p {
+    font-size: 16px;
+}
+
+.icon {
+    height: 30px;
+    width: 30px;
+    opacity: 0.5;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.icons {
+    text-align: center;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+}
+
+.link {
+    margin-left: 5px;
+}
+
+.other-accounts {
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 5px 0 5px;
+}
+
+.account {
+    margin: 7px;
+    margin-bottom: 5px;
+}
+
+.other-account-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+    margin-top: -4px;
+}
+
+.thick-hr {
+    border: none;
+    height: 5px;
+    color: #E7E7E7; /* old IE */
+    background-color: #E7E7E7; /* Modern Browsers */
+}
+
+.project-title {
+    font-weight: bold;
+}
+
+.project-heading {
+    padding: 0px;
+    margin: 2px;
+    text-decoration: none;
+}
+
+.collapse-anchor {
+    text-decoration: none !important;
+}
+
+.panel-title {
+    color: white !important;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.panel-group {
+    margin-top: 20px;
+}
+
+.panel-body a {
+    color: #3C763D !important;
+    text-decoration: none !important;
+}
+
+.thanks {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.design-thinking-process {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.process-step {
+    flex: 1;
+    min-width: 200px;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.process-step:hover {
+    transform: translateY(-5px);
+}
+
+.process-step h3 {
+    color: #007bff;
+    margin-bottom: 1rem;
+}
+
+.process-step p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
