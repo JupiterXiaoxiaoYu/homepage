@@ -49,10 +49,10 @@ export default function Sky() {
       big: seeded(i + 77) > 0.88,
     }));
 
-    const progress = () => {
-      const max = document.documentElement.scrollHeight - vh;
-      return max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-    };
+    // In game mode the world exposes knight position on window.__realm;
+    // fall back to page scroll for non-game contexts.
+    const realm = () => (window as any).__realm ?? { x: window.scrollY, p: 0 };
+    const progress = () => realm().p;
 
     const drawDisc = (cx: number, cy: number, r: number, col: string, glow: string) => {
       for (let y = -r - 4; y <= r + 4; y++) {
@@ -97,7 +97,7 @@ export default function Sky() {
 
     const draw = (t: number) => {
       const p = progress();
-      const sy = window.scrollY;
+      const sy = realm().x;
 
       // sky gradient — dusk bands
       const bands: [number, string][] = [
@@ -125,9 +125,10 @@ export default function Sky() {
         ctx.fillRect(Math.round(s.x), Math.round(s.y), sz, sz);
       });
 
-      // sun crossing the sky with scroll progress
-      const sunX = Math.round(26 + p * (W - 52));
-      const sunY = Math.round(H * 0.68 - Math.sin(p * Math.PI) * H * 0.38);
+      // sun rises higher as the monarch climbs the tower
+      const pp = Math.min(1, p);
+      const sunX = Math.round(26 + pp * (W - 52));
+      const sunY = Math.round(H * 0.78 - pp * H * 0.52);
       drawDisc(sunX, sunY, 11, "#ffd94a", "rgba(255,158,61,0.55)");
       // sun pixels shading
       ctx.fillStyle = "#ff9e3d";
@@ -208,14 +209,15 @@ export default function Sky() {
     };
 
     let last = 0;
-    let lastScroll = -1;
+    let lastX = -1;
     let raf = 0;
     const loop = (t: number) => {
       if (reduced) return;
-      if (t - last > 90 || window.scrollY !== lastScroll) {
+      const rx = realm().x + realm().p * 1000;
+      if (t - last > 90 || rx !== lastX) {
         draw(t);
         last = t;
-        lastScroll = window.scrollY;
+        lastX = rx;
       }
       raf = requestAnimationFrame(loop);
     };
