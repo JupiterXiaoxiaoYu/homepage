@@ -14,7 +14,7 @@ export const PROFILE = {
   stats: [
     { k: "hackathon wins", v: "27+" },
     { k: "chains shipped on", v: "8" },
-    { k: "retrieval scale", v: "1.36M posts" },
+    { k: "posts indexed", v: "1.36M" },
     { k: "query latency", v: "<100ms" },
   ],
 };

@@ -1,27 +1,33 @@
-import ScrollFx from "@/components/ed/ScrollFx";
-import Margin from "@/components/ed/Margin";
-import Masthead from "@/components/ed/Masthead";
-import ProfileSec from "@/components/ed/ProfileSec";
-import Works from "@/components/ed/Works";
-import Experience from "@/components/ed/Experience";
-import ResearchSec from "@/components/ed/ResearchSec";
-import ProofSec from "@/components/ed/ProofSec";
-import Channel from "@/components/ed/Channel";
+import Fx from "@/components/kd/Fx";
+import Sky from "@/components/kd/Sky";
+import Rider from "@/components/kd/Rider";
+import HUD from "@/components/kd/HUD";
+import Banner from "@/components/kd/Banner";
+import Quests from "@/components/kd/Quests";
+import Chronicle from "@/components/kd/Chronicle";
+import Grimoire from "@/components/kd/Grimoire";
+import Trophies from "@/components/kd/Trophies";
+import Inventory from "@/components/kd/Inventory";
+import Raven from "@/components/kd/Raven";
 
 export default function Page() {
   return (
-    <main className="sheet">
-      <ScrollFx />
-      <Margin />
-      <div className="sheet-inner">
-        <Masthead />
-        <ProfileSec />
-        <Works />
-        <Experience />
-        <ResearchSec />
-        <ProofSec />
-        <Channel />
-      </div>
-    </main>
+    <>
+      <Sky />
+      <HUD />
+      <Rider />
+      <Fx />
+      <main>
+        <Banner />
+        <div className="wrap">
+          <Quests />
+          <Chronicle />
+          <Grimoire />
+          <Trophies />
+          <Inventory />
+          <Raven />
+        </div>
+      </main>
+    </>
   );
 }

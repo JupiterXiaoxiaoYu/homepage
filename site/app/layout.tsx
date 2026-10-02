@@ -1,25 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, JetBrains_Mono, Instrument_Serif } from "next/font/google";
+import { Press_Start_2P, Silkscreen, IBM_Plex_Mono } from "next/font/google";
 import { BASE_PATH } from "@/lib/site";
 import "./globals.css";
 
-const grotesk = Space_Grotesk({
+const px = Press_Start_2P({
   subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["300", "400", "500", "700"],
+  variable: "--font-px",
+  weight: "400",
 });
 
-const mono = JetBrains_Mono({
+const head = Silkscreen({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-head",
+  weight: ["400", "700"],
+});
+
+const body = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-body",
   weight: ["400", "500"],
-});
-
-const serif = Instrument_Serif({
-  subsets: ["latin"],
-  variable: "--font-serif",
-  weight: ["400"],
-  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f2eee3",
+  themeColor: "#0d0b22",
   width: "device-width",
   initialScale: 1,
 };
@@ -41,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${grotesk.variable} ${mono.variable} ${serif.variable}`}>
+    <html lang="en" className={`${px.variable} ${head.variable} ${body.variable}`}>
       <body>{children}</body>
     </html>
   );
