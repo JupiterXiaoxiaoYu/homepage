@@ -1,16 +1,16 @@
 "use client";
 
-import { FLOORS } from "@/lib/tower";
+import { LEVELS } from "@/lib/dungeon";
 import PxIcon from "@/components/kd/PxIcon";
 import { ICON_HEART, ICON_COIN } from "@/lib/sprites";
 
-export default function HudG({ floor, seen, total }: { floor: number; seen: number; total: number }) {
+export default function HudG({ level, seen, total }: { level: number; seen: number; total: number }) {
   return (
     <>
       <header className="hud">
-        <span className="hud-brand">★ JUPITER&rsquo;S REALM</span>
+        <span className="hud-brand">★ JUPITER&rsquo;S DUNGEON</span>
         <span className="hud-floor">
-          {FLOORS[floor].name} <i>{FLOORS[floor].sub}</i>
+          <b>{LEVELS[level].depth}</b> {LEVELS[level].name} <i>{LEVELS[level].sub}</i>
         </span>
         <div className="hud-stats">
           <span className="hud-hearts">
@@ -25,10 +25,11 @@ export default function HudG({ floor, seen, total }: { floor: number; seen: numb
         </div>
       </header>
 
-      {/* tower minimap */}
+      {/* depth gauge — the dungeon cross-section */}
       <aside className="minimap" aria-hidden>
-        {FLOORS.map((f, i) => (
-          <div key={f.id} className={`mm-row ${i === floor ? "on" : ""}`}>
+        {LEVELS.map((l, i) => (
+          <div key={l.id} className={`mm-row ${i === level ? "on" : ""}`}>
+            <span className="mm-depth">{l.depth}</span>
             <i />
           </div>
         ))}

@@ -1,6 +1,6 @@
 "use client";
 
-import type { Item } from "@/lib/tower";
+import type { Item } from "@/lib/dungeon";
 import PxIcon from "@/components/kd/PxIcon";
 
 export default function Modal({ item, onClose }: { item: Item; onClose: () => void }) {
