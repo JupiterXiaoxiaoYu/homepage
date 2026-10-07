@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Press_Start_2P, Silkscreen, IBM_Plex_Mono } from "next/font/google";
-import { BASE_PATH } from "@/lib/site";
-import "./globals.css";
+import "./dungeon.css";
 
 const px = Press_Start_2P({
   subsets: ["latin"],
@@ -22,10 +21,9 @@ const body = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jupiter Yu — Engineer · Researcher · Founder",
-  description:
-    "Building verifiable systems at the edge of AI and cryptography. Ecosystem Director @ Delphinus Lab (zkWASM). 27× hackathon winner.",
-  icons: { icon: `${BASE_PATH}/icon.jpg` },
+  title: "Jupiter Yu — the dungeon",
+  description: "A playable pixel descent through Jupiter Yu's work.",
+  icons: { icon: "/icon.jpg" },
 };
 
 export const viewport: Viewport = {
@@ -34,7 +32,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default function PlayLayout({
   children,
 }: {
   children: React.ReactNode;
