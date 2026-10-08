@@ -21,6 +21,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
 body {
+  overflow-x: clip;
   background: var(--desk);
   color: var(--ink);
   font-family: var(--font-gara), var(--font-gara-zh), Georgia, serif;
@@ -66,8 +67,8 @@ a { color: inherit; }
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: min(1180px, 94vw);
-  height: min(800px, calc(100dvh - 130px));
+  width: min(1320px, 84vw);
+  height: min(880px, calc(100dvh - 108px));
   min-height: 480px;
   perspective: 2400px;
 }
@@ -91,8 +92,16 @@ a { color: inherit; }
   position: relative;
   overflow: hidden;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E"),
-    linear-gradient(100deg, var(--paper-vs), var(--paper) 12%, var(--paper) 88%, #ddccab);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E"),
+    /* foxing spots */
+    radial-gradient(90px 55px at 84% 14%, rgba(148, 104, 48, 0.13), transparent 70%),
+    radial-gradient(120px 80px at 10% 82%, rgba(148, 104, 48, 0.11), transparent 70%),
+    radial-gradient(45px 30px at 62% 58%, rgba(148, 104, 48, 0.07), transparent 70%),
+    radial-gradient(28px 18px at 30% 30%, rgba(148, 104, 48, 0.09), transparent 70%),
+    radial-gradient(58px 58px at 22% 88%, transparent 52%, rgba(120, 78, 30, 0.10) 62%, transparent 74%),
+    /* browned edges */
+    radial-gradient(150% 130% at 50% 50%, transparent 58%, rgba(120, 84, 40, 0.22) 100%),
+    linear-gradient(100deg, #e5d6b4, var(--paper) 10%, var(--paper) 86%, #dcc9a0);
 }
 .b-page.left {
   border-radius: 4px 0 0 4px;
@@ -108,7 +117,7 @@ a { color: inherit; }
   position: absolute;
   top: 0; bottom: 0; right: 0;
   width: 7px;
-  background: repeating-linear-gradient(0deg, rgba(90, 70, 40, 0.35) 0 1px, rgba(239, 229, 205, 0.9) 1px 3px);
+  background: repeating-linear-gradient(0deg, rgba(184, 137, 47, 0.5) 0 1px, rgba(239, 229, 205, 0.85) 1px 3px);
   pointer-events: none;
 }
 .b-page.left::before {
@@ -116,7 +125,7 @@ a { color: inherit; }
   position: absolute;
   top: 0; bottom: 0; left: 0;
   width: 7px;
-  background: repeating-linear-gradient(0deg, rgba(90, 70, 40, 0.3) 0 1px, rgba(231, 218, 191, 0.9) 1px 3px);
+  background: repeating-linear-gradient(0deg, rgba(184, 137, 47, 0.42) 0 1px, rgba(231, 218, 191, 0.85) 1px 3px);
   pointer-events: none;
 }
 
@@ -381,6 +390,49 @@ a { color: inherit; }
   padding: 9px 4px;
 }
 
+/* wax seal */
+.b-seal {
+  position: relative;
+  width: 92px; height: 92px;
+  margin: 4px auto 0;
+  border-radius: 47% 53% 51% 49% / 52% 46% 54% 48%;
+  background:
+    radial-gradient(circle at 34% 30%, rgba(255, 220, 200, 0.35), transparent 42%),
+    radial-gradient(circle at 60% 70%, rgba(60, 8, 4, 0.55), transparent 70%),
+    #7c2417;
+  box-shadow:
+    0 5px 14px rgba(30, 10, 4, 0.55),
+    inset 0 0 0 5px rgba(60, 8, 4, 0.35),
+    inset 0 0 0 9px rgba(255, 220, 190, 0.12);
+}
+.b-seal span {
+  position: absolute;
+  inset: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(255, 226, 200, 0.5);
+  border-radius: 50%;
+  font-family: var(--font-disp), serif;
+  font-size: 26px;
+  color: rgba(255, 226, 200, 0.85);
+  text-shadow: 0 1px 0 rgba(60, 8, 4, 0.8);
+}
+
+/* corner fleurons on engraved frames */
+.b-fleuron {
+  position: absolute;
+  font-style: normal;
+  font-size: 15px;
+  color: var(--ink2);
+  line-height: 1;
+}
+.b-fleuron.tl { top: -10px; left: -10px; transform: rotate(180deg); }
+.b-fleuron.tr { top: -10px; right: -10px; transform: rotate(90deg); }
+.b-fleuron.bl { bottom: -10px; left: -10px; transform: rotate(-90deg); }
+.b-fleuron.br { bottom: -10px; right: -10px; }
+.b-title-frame { position: relative; }
+
 /* ── turn buttons ──────────────────────────────────────────────────────────── */
 
 .b-turn {
@@ -402,34 +454,35 @@ a { color: inherit; }
 .b-ribs { position: absolute; inset: 0; pointer-events: none; }
 .b-rib {
   position: absolute;
-  right: -30px;
-  width: 34px;
-  height: 118px;
+  right: -100px;
+  width: 114px;
+  height: 36px;
   pointer-events: auto;
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), 55% 100%, 0 calc(100% - 16px));
+  border-radius: 0 7px 7px 0;
   transform: translateX(0);
   transition: transform 0.35s var(--ease);
-  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.45);
   z-index: 6;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
 }
 .b-rib::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 40%, rgba(0, 0, 0, 0.25));
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent 45%, rgba(255, 255, 255, 0.16));
 }
-.b-rib:hover { transform: translateX(9px); }
+.b-rib:hover { transform: translateX(10px); }
 .b-rib span {
-  position: absolute;
-  left: 50%; top: 34px;
-  transform: translateX(-50%) rotate(90deg);
-  transform-origin: left center;
-  white-space: nowrap;
+  position: relative;
   font-family: var(--font-mono), monospace;
-  font-size: 9px;
-  letter-spacing: 0.22em;
+  font-size: 10px;
+  letter-spacing: 0.12em;
   color: rgba(255, 248, 230, 0.95);
   text-transform: uppercase;
+  white-space: nowrap;
 }
 .rib-ai { background: var(--rib-ai); }
 .rib-web3 { background: var(--rib-web3); }
@@ -525,14 +578,17 @@ a { color: inherit; }
     box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.35);
   }
   .b-rib:hover { transform: none; }
+  .b-rib {
+    padding-left: 0;
+    justify-content: center;
+  }
   .b-rib span {
     position: static;
-    transform: none;
     display: block;
     text-align: center;
     font-size: 8px;
-    letter-spacing: 0.06em;
-    padding-top: 11px;
+    letter-spacing: 0.04em;
+    padding-top: 2px;
   }
   .b-ptab { right: -8px; }
   .b-leaf { display: none; }

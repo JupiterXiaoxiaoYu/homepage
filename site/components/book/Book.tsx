@@ -14,11 +14,11 @@ import { loc } from "@/lib/i18n";
 
 const SPREADS = 4;
 
-const CHAPTERS = [
+const CHAPTERS: { key: string; en: string; zh: string; tabEn?: string; folio: string }[] = [
   { key: "ai", en: "AI Works", zh: "智能之作", folio: "1" },
   { key: "web3", en: "On-Chain Works", zh: "链上之作", folio: "9" },
   { key: "res", en: "Research Notes", zh: "研究手记", folio: "17" },
-  { key: "hack", en: "Hackathon Ledger", zh: "黑客松账册", folio: "21" },
+  { key: "hack", en: "Hackathon Ledger", zh: "黑客松账册", tabEn: "Hackathons", folio: "21" },
   { key: "me", en: "Cursus Vitae", zh: "生平", folio: "27" },
 ];
 
@@ -76,6 +76,9 @@ const CHAPTER_ENTRIES = ["sovereign-rag", "trustai", "martech3", "antifraud"];
 
 const proj = (id: string, lang: Lang): Project =>
   loc(PROJECTS.find((p) => p.id === id)!, lang);
+
+const PAGES = SPREADS * 2;
+const folio = (label: string, n: number) => `${label} · ${n}/${PAGES}`;
 
 /* keyword → entry scorer (mirrors the API's offline fallback, trimmed) */
 const STOP = new Set(
@@ -247,15 +250,18 @@ export default function Book({ lang }: { lang: Lang }) {
                 <span className="b-ex-sub">{PROFILE.handle}</span>
               </div>
             </div>
+            <div className="b-seal" aria-hidden><span>JY</span></div>
             <p className="b-marg b-marg-c">{t.specimen}</p>
           </div>
-          <div className="b-folio">{t.folio} ii</div>
+          <div className="b-folio">{folio(t.folio + " ii", 1)}</div>
         </>
       ),
       r: (
         <>
           <div className="b-titlepage">
             <div className="b-title-frame">
+              <i className="b-fleuron tl">❦</i><i className="b-fleuron tr">❦</i>
+              <i className="b-fleuron bl">❦</i><i className="b-fleuron br">❦</i>
               <p className="b-over">{t.manuscript}</p>
               <h1>JUPITER&nbsp;YU</h1>
               {engraved}
@@ -263,7 +269,7 @@ export default function Book({ lang }: { lang: Lang }) {
               <p className="b-colophon">{t.colophon}</p>
             </div>
           </div>
-          <div className="b-folio">{t.folio} i</div>
+          <div className="b-folio">{folio(t.folio + " i", 2)}</div>
         </>
       ),
     },
@@ -289,7 +295,7 @@ export default function Book({ lang }: { lang: Lang }) {
               ))}
             </div>
           </div>
-          <div className="b-folio">{t.folio} iii</div>
+          <div className="b-folio">{folio(t.folio + " iii", 3)}</div>
         </>
       ),
       r: (
@@ -312,7 +318,7 @@ export default function Book({ lang }: { lang: Lang }) {
               <span className="b-toc-f">31</span>
             </li>
           </ol>
-          <div className="b-folio">{t.folio} iv</div>
+          <div className="b-folio">{folio(t.folio + " iv", 4)}</div>
         </>
       ),
     },
@@ -330,7 +336,7 @@ export default function Book({ lang }: { lang: Lang }) {
               {lang === "zh" ? "从检索开始入迷 ↓" : "got obsessed with retrieval here ↓"}
             </p>
           </div>
-          <div className="b-folio">1</div>
+          <div className="b-folio">{folio("1", 5)}</div>
         </>
       ),
       r: (
@@ -344,7 +350,7 @@ export default function Book({ lang }: { lang: Lang }) {
           <p className="b-fn">
             <sup>1</sup> {lang === "zh" ? "硕士论文，香港科技大学，进行中。" : "MPhil thesis, HKUST — work in progress."}
           </p>
-          <div className="b-folio">2</div>
+          <div className="b-folio">{folio("2", 6)}</div>
         </>
       ),
     },
@@ -364,7 +370,7 @@ export default function Book({ lang }: { lang: Lang }) {
               <li key={m}>{m}</li>
             ))}
           </ul>
-          <div className="b-folio">3</div>
+          <div className="b-folio">{folio("3", 7)}</div>
         </>
       ),
       r: (
@@ -373,7 +379,7 @@ export default function Book({ lang }: { lang: Lang }) {
           <Entry id="martech3" note={lang === "zh" ? "AIGC×Web3 试水" : "AIGC × Web3"} />
           <Entry id="antifraud" note={lang === "zh" ? "拿了第一名" : "1st place — nice"} />
           <p className="b-end">❦</p>
-          <div className="b-folio">4</div>
+          <div className="b-folio">{folio("4", 8)}</div>
         </>
       ),
     },
@@ -437,7 +443,7 @@ export default function Book({ lang }: { lang: Lang }) {
               role="tab"
               aria-label={lang === "zh" ? c.zh : c.en}
             >
-              <span>{lang === "zh" ? c.zh : c.en}</span>
+              <span>{lang === "zh" ? c.zh : (c.tabEn ?? c.en)}</span>
             </button>
           ))}
         </div>
