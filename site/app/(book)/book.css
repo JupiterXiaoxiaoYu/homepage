@@ -433,6 +433,67 @@ a { color: inherit; }
 .b-fleuron.br { bottom: -10px; right: -10px; }
 .b-title-frame { position: relative; }
 
+/* ledger table (hackathon chapter) */
+.b-ledger {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(12.5px, 1.05vw, 14px);
+}
+.b-ledger td {
+  padding: 7px 4px;
+  border-bottom: 1px solid rgba(106, 93, 71, 0.2);
+  vertical-align: top;
+}
+.b-ledger .b-ly {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  color: var(--ink2);
+  width: 42px;
+  padding-top: 9px;
+}
+.b-ledger .b-lr {
+  text-align: right;
+  font-style: italic;
+  color: var(--rib-res);
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+/* cursus vitae rows */
+.b-cv { margin-top: 18px; }
+.b-cv-row {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 2px 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(106, 93, 71, 0.18);
+}
+.b-cv-p {
+  grid-row: span 2;
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink2);
+  padding-top: 3px;
+}
+.b-cv-r { font-variant: small-caps; letter-spacing: 0.06em; font-size: 15px; font-weight: 600; }
+.b-cv-o { font-size: 12.5px; color: var(--ink2); font-style: italic; }
+
+/* appendix lists */
+.b-h3 {
+  font-variant: small-caps;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 20px 0 8px;
+  border-bottom: 1px solid rgba(106, 93, 71, 0.3);
+  padding-bottom: 5px;
+}
+.b-list { list-style: none; }
+.b-list li { font-size: 13.5px; padding: 5px 0; color: var(--ink); }
+.b-list a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--ink2); }
+.b-list a:hover { border-bottom-style: solid; }
+
 /* ── turn buttons ──────────────────────────────────────────────────────────── */
 
 .b-turn {
