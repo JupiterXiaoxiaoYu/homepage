@@ -21,7 +21,7 @@ import { loc } from "@/lib/i18n";
 
 /* ── specimen structure ─────────────────────────────────────────────────────── */
 
-const SPREADS = 9;
+const SPREADS = 10;
 const PAGES = SPREADS * 2;
 const folio = (label: string, n: number) => `${label} · ${n}/${PAGES}`;
 
@@ -73,12 +73,17 @@ const CHAPTERS: {
 
 const T = {
   en: {
-    specimen: "SPECIMEN · 样张",
+    specimen: "A WORKING MANUSCRIPT",
     manuscript: "A Working Manuscript",
     readerTitle: "To the Reader",
     readerBody:
-      "This volume gathers what Jupiter Yu has built, studied and won — bound, not scrolled. The tabs on the fore-edge jump between chapters; the leaves themselves turn. Ask the index a question below, and the book will find the passage itself.",
+      "This volume gathers what Jupiter Yu has built, studied and won — bound, not scrolled. The tabs on the fore-edge jump between chapters; the leaves themselves turn. And at the back, an index that answers questions — ask it, and the book will leaf to the passage itself.",
     askPlaceholder: "Ask the index a question…",
+    indexTitle: "The Index",
+    indexBody:
+      "Every proper book ends in an index; this one is alive. Ask it anything about the author — the book will turn to the passage and mark it for you.",
+    indexTeaser: "an index that answers — folio 19 →",
+    leafing: "the index is leafing…",
     contents: "Contents",
     folio: "Fol.",
     chapter: "Chapter",
@@ -100,12 +105,17 @@ const T = {
     ongoing: "ongoing",
   },
   zh: {
-    specimen: "SPECIMEN · 样张",
+    specimen: "工作手稿",
     manuscript: "一册在手 · 工作手稿",
     readerTitle: "致读者",
     readerBody:
-      "本册收录于杰宇所做、所学、所赢——装订成书，而非无尽下滑。书口处的标签用来跳章，书页真的会翻动。在下方问索引一个问题，书会自己翻到答案所在的那一页。",
+      "本册收录于杰宇所做、所学、所赢——装订成书，而非无尽下滑。书口处的标签用来跳章，书页真的会翻动。书末还有一页活的索引——问它问题，书会自己翻到答案所在的那一页。",
     askPlaceholder: "向索引提一个问题…",
+    indexTitle: "索引",
+    indexBody:
+      "凡正经的书，卷末都有索引；这一册的索引是活的。问它任何关于作者的问题——书会自己翻到那一页，并把答案划出来。",
+    indexTeaser: "书末的索引会回答问题——第 19 页 →",
+    leafing: "索引正在翻页…",
     contents: "目录",
     folio: "页",
     chapter: "第",
@@ -128,7 +138,7 @@ const T = {
   },
 };
 
-/* every project that appears in the book, with its spread */
+/* every citable entry: id → spread (and printed folio for the index) */
 const ENTRY_SPREAD: Record<string, number> = {
   "sovereign-rag": 2,
   trustai: 2,
@@ -140,6 +150,22 @@ const ENTRY_SPREAD: Record<string, number> = {
   "rosen-app": 5,
   "nft-similarity": 5,
   "daily-lens": 5,
+  "defi-formal": 6,
+  ...Object.fromEntries(WORK.flatMap((w) => [[w.id, 8], [`work-${w.id}`, 8]])),
+};
+
+const ENTRY_FOLIO: Record<string, number> = {
+  "sovereign-rag": 2,
+  trustai: 2,
+  martech3: 4,
+  antifraud: 4,
+  "zkwasm-suite": 10,
+  neurodaos: 10,
+  "social-chain": 11,
+  "rosen-app": 11,
+  "nft-similarity": 12,
+  "daily-lens": 12,
+  "defi-formal": 14,
 };
 
 const proj = (id: string, lang: Lang): Project =>
@@ -175,6 +201,8 @@ export default function Book({ lang }: { lang: Lang }) {
   const [hl, setHl] = useState<string | null>(null);
   const [tab, setTab] = useState<{ top: number; label: string } | null>(null);
   const [answer, setAnswer] = useState<string | null>(null);
+  const [slip, setSlip] = useState<{ id: string; text: string } | null>(null);
+  const [busy, setBusy] = useState(false);
   const [turned, setTurned] = useState(false);
   const bookRef = useRef<HTMLDivElement>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
@@ -219,25 +247,66 @@ export default function Book({ lang }: { lang: Lang }) {
     );
   }, []);
 
+  const resolve = useCallback(
+    (id: string | null, query: string) => {
+      const hit = (id && ENTRY_SPREAD[id] != null && id) || score(query);
+      if (!hit) return null;
+      return { id: hit, spread: ENTRY_SPREAD[hit] ?? 8 };
+    },
+    [],
+  );
+
   const ask = useCallback(
-    (q: string) => {
+    async (q: string) => {
       const query = q.trim().slice(0, 140);
-      if (!query) return;
-      const hit = score(query);
+      if (!query || busy) return;
+      setBusy(true);
+      setAnswer(t.leafing);
+      setSlip(null);
+      setHl(null);
+      setTab(null);
+      let text = "";
+      try {
+        const res = await fetch("/api/ask", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ lang, messages: [{ role: "user", content: query }] }),
+        });
+        if (!res.ok || !res.body) throw new Error("ask failed");
+        const reader = res.body.getReader();
+        const dec = new TextDecoder();
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          text += dec.decode(value, { stream: true });
+          setAnswer(text.replace(/\[\[[a-z0-9-]+\]\]/gi, "").slice(-400));
+        }
+      } catch {
+        /* offline — fall through to the local index */
+      }
+      setBusy(false);
+      const cite = /\[\[([a-z0-9-]+)\]\]/i.exec(text)?.[1]?.toLowerCase() ?? null;
+      const clean =
+        text.replace(/\[\[[a-z0-9-]+\]\]/gi, "").replace(/\s+/g, " ").trim().slice(0, 340) ||
+        null;
+      const hit = resolve(cite, query);
       if (!hit) {
-        setAnswer(t.noMatch);
+        setAnswer(clean ?? t.noMatch);
         return;
       }
-      const p = proj(hit, lang);
-      const target = ENTRY_SPREAD[hit];
-      setAnswer(`${t.found} ${CHAPTERS.find((c) => c.spread <= target && target < c.spread + 4)?.folio ?? ""}: ${p.name}`);
-      go(target);
-      land(hit, "?");
+      const p = PROJECTS.find((x) => x.id === hit.id);
+      setAnswer(clean ?? `${t.found} ${ENTRY_FOLIO[hit.id] ?? ""}: ${p ? loc(p, lang).name : hit.id}`);
+      if (spread !== hit.spread) go(hit.spread);
+      if (clean) setSlip({ id: hit.id, text: clean });
+      land(hit.id, "?");
     },
-    [lang, t, go, land],
+    [busy, lang, spread, t, go, land, resolve],
   );
 
   /* ── building blocks ────────────────────────────────────────────────────── */
+
+  const Slip = ({ id }: { id: string }) =>
+    slip?.id === id ? <aside className="b-slip">{slip.text}</aside> : null;
 
   const Entry = ({ id, note }: { id: string; note?: string }) => {
     const p = proj(id, lang);
@@ -251,6 +320,7 @@ export default function Book({ lang }: { lang: Lang }) {
         </header>
         <p>{p.summary}</p>
         {p.impact && <p className="b-imp">{p.impact}</p>}
+        <Slip id={id} />
         {note && <aside className="b-marg">{note}</aside>}
       </article>
     );
@@ -349,19 +419,9 @@ export default function Book({ lang }: { lang: Lang }) {
           {pagehead(t.manuscript)}
           <h2 className="b-h2">{t.readerTitle}</h2>
           <p className="b-body">{t.readerBody}</p>
-          <div className="b-askbox">
-            <label className="b-marg">{t.askPlaceholder}</label>
-            <AskInline onAsk={ask} lang={lang} />
-            {answer && <p className="b-ans">{answer}</p>}
-            <div className="b-chips">
-              {(lang === "zh"
-                ? ["他做过什么 AI 项目？", "有什么 Web3 作品？", "黑客松成绩如何？"]
-                : ["What has he built in AI?", "Any Web3 work?", "Hackathon record?"]
-              ).map((c) => (
-                <button key={c} onClick={() => ask(c)}>{c}</button>
-              ))}
-            </div>
-          </div>
+          <button className="b-idxlink" onClick={() => go(9)}>
+            <span className="b-marg">{t.indexTeaser}</span>
+          </button>
           <div className="b-folio">{folio(t.folio + " iii", 3)}</div>
         </>
       ),
@@ -383,6 +443,14 @@ export default function Book({ lang }: { lang: Lang }) {
               <span className="b-toc-t">{t.appendix}</span>
               <span className="b-dots" />
               <span className="b-toc-f">18</span>
+            </li>
+            <li className="b-toc-app b-toc-idx">
+              <span className="b-toc-n" />
+              <span className="b-toc-t">
+                <button onClick={() => go(9)}>{t.indexTitle}</button>
+              </span>
+              <span className="b-dots" />
+              <span className="b-toc-f">19</span>
             </li>
           </ol>
           <div className="b-folio">{folio(t.folio + " iv", 4)}</div>
@@ -489,13 +557,14 @@ export default function Book({ lang }: { lang: Lang }) {
           {RESEARCH.map((r) => {
             const rr = loc(r, lang);
             return (
-              <article className="b-entry" key={r.id}>
+              <article className={`b-entry ${hl === r.id ? "hl" : ""}`} key={r.id} id={`ent-${r.id}`}>
                 <header>
                   <h3>{rr.title}</h3>
                   <div className="b-meta">{r.venue} · {r.period}</div>
                 </header>
                 <p>{rr.summary}</p>
                 <p className="b-imp">{r.metrics.map((m) => `${m.v} ${m.k}`).join(" · ")}</p>
+                <Slip id={r.id} />
               </article>
             );
           })}
@@ -541,11 +610,16 @@ export default function Book({ lang }: { lang: Lang }) {
           <div className="b-cv">
             {WORK.map((w) => {
               const wl = loc(w, lang);
+              const wid = `work-${w.id}`;
               return (
-                <div className="b-cv-row" key={w.id}>
-                  <span className="b-cv-p">{w.period.replace("now", t.ongoing)}</span>
-                  <span className="b-cv-r">{wl.role}</span>
-                  <span className="b-cv-o">{w.org}{w.backing ? ` · ${w.backing}` : ""}</span>
+                <div key={w.id}>
+                  <div className={`b-cv-row ${hl === wid || hl === w.id ? "hl" : ""}`} id={`ent-${wid}`}>
+                    <span className="b-cv-p">{w.period.replace("now", t.ongoing)}</span>
+                    <span className="b-cv-r">{wl.role}</span>
+                    <span className="b-cv-o">{w.org}{w.backing ? ` · ${w.backing}` : ""}</span>
+                  </div>
+                  <Slip id={wid} />
+                  <Slip id={w.id} />
                 </div>
               );
             })}
@@ -571,6 +645,72 @@ export default function Book({ lang }: { lang: Lang }) {
           </ul>
           <p className="b-end">{t.end} ❦</p>
           <div className="b-folio">{folio("18", 18)}</div>
+        </>
+      ),
+    },
+    /* 9 — the index (a living one) */
+    {
+      l: (
+        <>
+          {pagehead(t.indexTitle)}
+          <h2 className="b-h2">{t.indexTitle}</h2>
+          <p className="b-body">{t.indexBody}</p>
+          <div className="b-askbox b-askbox-big">
+            <label className="b-marg">{t.askPlaceholder}</label>
+            <AskInline onAsk={ask} lang={lang} busy={busy} />
+            {answer && <p className="b-ans">{answer}</p>}
+            <div className="b-chips">
+              {(lang === "zh"
+                ? ["他做过什么 AI 项目？", "有什么 Web3 作品？", "黑客松成绩如何？", "他现在在哪工作？"]
+                : ["What has he built in AI?", "Any Web3 work?", "Hackathon record?", "Where does he work now?"]
+              ).map((c) => (
+                <button key={c} onClick={() => ask(c)} disabled={busy}>{c}</button>
+              ))}
+            </div>
+          </div>
+          <div className="b-folio">{folio("19", 19)}</div>
+        </>
+      ),
+      r: (
+        <>
+          {pagehead(t.indexTitle)}
+          <ul className="b-index">
+            {[...Object.keys(ENTRY_FOLIO)]
+              .sort((a, b) => ENTRY_FOLIO[a] - ENTRY_FOLIO[b])
+              .map((id) => {
+                const p = PROJECTS.find((x) => x.id === id);
+                const r = RESEARCH.find((x) => x.id === id);
+                const name = p ? loc(p, lang).name : r ? loc(r, lang).title : id;
+                const kind = p ? p.category[0].toUpperCase() : "RESEARCH";
+                return (
+                  <li key={id}>
+                    <button onClick={() => { go(ENTRY_SPREAD[id]); land(id, "→"); }}>
+                      <span className="b-ix-t">{name}</span>
+                      <span className="b-ix-k">{kind}</span>
+                      <span className="b-dots" />
+                      <span className="b-ix-f">{ENTRY_FOLIO[id]}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            <li>
+              <button onClick={() => go(7)}>
+                <span className="b-ix-t">{lang === "zh" ? "黑客松账册" : "Hackathon Ledger"}</span>
+                <span className="b-ix-k">HONOURS</span>
+                <span className="b-dots" />
+                <span className="b-ix-f">16</span>
+              </button>
+            </li>
+            <li>
+              <button onClick={() => go(8)}>
+                <span className="b-ix-t">{lang === "zh" ? "生平 · 书信" : "Cursus Vitae · Correspondence"}</span>
+                <span className="b-ix-k">CV</span>
+                <span className="b-dots" />
+                <span className="b-ix-f">17</span>
+              </button>
+            </li>
+          </ul>
+          <div className="b-folio">{folio("20", 20)}</div>
         </>
       ),
     },
@@ -600,7 +740,7 @@ export default function Book({ lang }: { lang: Lang }) {
         <span>JUPITER YU · {t.specimen}</span>
         <nav>
           <span className="b-hintline">{t.hint}</span>
-          <Link href={lang === "zh" ? "/en/book" : "/zh/book"}>
+          <Link href={lang === "zh" ? "/en" : "/zh"}>
             {lang === "zh" ? "EN" : "中文"}
           </Link>
         </nav>
@@ -625,7 +765,7 @@ export default function Book({ lang }: { lang: Lang }) {
             <button
               key={c.key}
               className={`b-rib rib-${c.key}`}
-              style={{ top: `${9 + i * 16}%` }}
+              style={{ top: `${8 + i * 14}%` }}
               onClick={() => go(c.spread)}
               role="tab"
               aria-label={lang === "zh" ? c.zh : c.en}
@@ -633,6 +773,15 @@ export default function Book({ lang }: { lang: Lang }) {
               <span>{lang === "zh" ? c.zh : (c.tabEn ?? c.en)}</span>
             </button>
           ))}
+          <button
+            className="b-rib rib-idx"
+            style={{ top: `${8 + CHAPTERS.length * 14}%` }}
+            onClick={() => go(9)}
+            role="tab"
+            aria-label={t.indexTitle}
+          >
+            <span>{lang === "zh" ? "索引" : "Index"}</span>
+          </button>
         </div>
 
         {tab && (
@@ -656,7 +805,7 @@ export default function Book({ lang }: { lang: Lang }) {
   );
 }
 
-function AskInline({ onAsk, lang }: { onAsk: (q: string) => void; lang: Lang }) {
+function AskInline({ onAsk, lang, busy }: { onAsk: (q: string) => void; lang: Lang; busy?: boolean }) {
   const [q, setQ] = useState("");
   return (
     <form
@@ -669,6 +818,7 @@ function AskInline({ onAsk, lang }: { onAsk: (q: string) => void; lang: Lang }) 
       <input
         value={q}
         onChange={(e) => setQ(e.target.value)}
+        disabled={busy}
         placeholder={lang === "zh" ? "比如：他做过什么 AI 项目？" : "e.g. what has he built in AI?"}
         aria-label="ask"
       />
