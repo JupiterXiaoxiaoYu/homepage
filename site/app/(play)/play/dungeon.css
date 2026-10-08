@@ -21,7 +21,7 @@ html, body { height: 100%; overflow: hidden; }
 body {
   background: var(--night);
   color: var(--parch);
-  font-family: var(--font-body), monospace;
+  font-family: var(--font-plex), monospace;
   font-size: 14px;
   -webkit-user-select: none;
   user-select: none;

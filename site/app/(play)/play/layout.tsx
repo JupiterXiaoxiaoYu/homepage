@@ -1,24 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Press_Start_2P, Silkscreen, IBM_Plex_Mono } from "next/font/google";
+import "../../fonts.css";
 import "./dungeon.css";
-
-const px = Press_Start_2P({
-  subsets: ["latin"],
-  variable: "--font-px",
-  weight: "400",
-});
-
-const head = Silkscreen({
-  subsets: ["latin"],
-  variable: "--font-head",
-  weight: ["400", "700"],
-});
-
-const body = IBM_Plex_Mono({
-  subsets: ["latin"],
-  variable: "--font-body",
-  weight: ["400", "500"],
-});
 
 export const metadata: Metadata = {
   title: "Jupiter Yu — the dungeon",
@@ -38,7 +20,7 @@ export default function PlayLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${px.variable} ${head.variable} ${body.variable}`}>
+    <html lang="en">
       <body>{children}</body>
     </html>
   );

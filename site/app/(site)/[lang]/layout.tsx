@@ -1,11 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Instrument_Serif,
-  Inter_Tight,
-  JetBrains_Mono,
-  Noto_Serif_SC,
-  Noto_Sans_SC,
-} from "next/font/google";
 import { notFound } from "next/navigation";
 import { isLang, ui } from "@/lib/i18n";
 import { PROFILE, type Lang } from "@/lib/data";
@@ -13,33 +6,8 @@ import Nav from "@/components/site/Nav";
 import Footer from "@/components/site/Footer";
 import Lenis from "@/components/site/Lenis";
 import Ask from "@/components/ask/AskPanel";
+import "../../fonts.css";
 import "../globals.css";
-
-const display = Instrument_Serif({
-  subsets: ["latin"],
-  variable: "--font-display",
-  weight: "400",
-  style: ["normal", "italic"],
-});
-const body = Inter_Tight({
-  subsets: ["latin"],
-  variable: "--font-body",
-});
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  weight: ["400", "500"],
-});
-const displayZh = Noto_Serif_SC({
-  variable: "--font-display-zh",
-  weight: ["400", "600"],
-  preload: false,
-});
-const bodyZh = Noto_Sans_SC({
-  variable: "--font-body-zh",
-  weight: ["400", "500"],
-  preload: false,
-});
 
 export function generateStaticParams() {
   return [{ lang: "en" }, { lang: "zh" }];
@@ -73,10 +41,7 @@ export default async function SiteLayout({
   const t = ui(l);
 
   return (
-    <html
-      lang={l === "zh" ? "zh-CN" : "en"}
-      className={`${display.variable} ${body.variable} ${mono.variable} ${displayZh.variable} ${bodyZh.variable}`}
-    >
+    <html lang={l === "zh" ? "zh-CN" : "en"}>
       <body>
         <Lenis />
         <div className="grain" aria-hidden />
