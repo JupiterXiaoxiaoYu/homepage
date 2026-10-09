@@ -24,7 +24,7 @@ export const PROFILE = {
   stats: [
     { k: "hackathon & competition awards", v: "33" },
     { k: "first-place finishes", v: "12" },
-    { k: "agent outputs publish-ready", v: "~90%" },
+    { k: "agent outputs with no manual re-edit", v: "~90%" },
     { k: "open-source stars", v: "200" },
   ],
 };
@@ -118,14 +118,14 @@ export type Work = {
 export const WORK: Work[] = [
   {
     id: "viciking",
-    role: "Agent Engineer",
+    role: "Agent Engineer (full-time)",
     org: "Viciking (Beijing Weixi)",
     backing: "AI video production",
     period: "2026.07 — now",
     current: true,
     points: [
       "Sole engineer, frontend to agent runtime, on four internal AI video-production products",
-      "Agent mode turns a script into a finished 1-minute episode in 15–30 min; ~90% of outputs publish-ready",
+      "Agent mode turns a script into a finished 1-minute episode in 15–30 min; ~90% need no manual re-editing",
       "Doubled production efficiency vs. manual editing; dozens of internal users across business lines",
       "Durable agent runtimes, MCP tools, OpenTelemetry alerts and eval harnesses that decide what ships",
     ],
@@ -133,7 +133,7 @@ export const WORK: Work[] = [
       role: "Agent 工程师",
       points: [
         "四个内部 AI 视频生产产品的唯一工程师，从前端一直做到 Agent 运行时",
-        "Agent 模式下 1 分钟成片从剧本到出片 15–30 分钟，约 90% 可直接发布",
+        "Agent 模式下 1 分钟成片从剧本到出片 15–30 分钟，约 90% 无需人工返工",
         "相比人工剪辑生产效率提升 2 倍，几十名内部用户、覆盖多条业务线",
         "可恢复的 Agent 运行时、MCP 工具、OpenTelemetry 告警，以及决定什么能上线的评测框架",
       ],
@@ -290,18 +290,18 @@ export const PROJECTS: Project[] = [
     category: ["agent", "ai"],
     summary:
       "AI short-drama and ad production: script → cast and scenes → storyboard → finished, subtitled video, in agent or manual mode, batched and run in parallel.",
-    impact: "1-min episode in 15–30 min · ~90% publish-ready · 2× production efficiency",
+    impact: "1-min episode in 15–30 min · ~90% need no manual re-edit · 2× production efficiency",
     detail:
-      "A durable production coordinator on Temporal and PostgreSQL. Generation inputs are frozen into immutable snapshots, writes use idempotency keys and compare-and-set checks, failures are classified before retrying, and batches allow partial success — only failed items rerun, finished shots are never regenerated. Model routing and fallback, voice repair, storyboard rules that avoid empty shots, and automatic subtitles and packaging get ~90% of outputs publish-ready. Every text-model call is traced (redacted I/O, cached tokens, stream checkpoints, failure evidence) so slow or stuck calls can be diagnosed. Exports to editable CapCut (Jianying) drafts. ~1,900 commits, ~5,000 tests plus Playwright end-to-end.",
+      "A durable production coordinator on Temporal and PostgreSQL. Generation inputs are frozen into immutable snapshots, writes use idempotency keys and compare-and-set checks, failures are classified before retrying, and batches allow partial success — only failed items rerun, finished shots are never regenerated. Model routing and fallback, voice repair, storyboard rules that avoid empty shots, and automatic subtitles and packaging mean ~90% of outputs need no manual re-editing; the rest need only light edits. Every text-model call is traced (redacted I/O, cached tokens, stream checkpoints, failure evidence) so slow or stuck calls can be diagnosed. Exports to editable CapCut (Jianying) drafts. ~5,000 tests plus Playwright end-to-end.",
     stack: ["React 19", "FastAPI", "Temporal", "PostgreSQL", "SSE", "Seedance", "Qwen"],
     links: [],
     zh: {
       name: "唯创 · AI 短剧工作台",
       role: "Agent 工程师 · 唯西",
       summary: "AI 短剧与广告生产：剧本 → 角色与场景 → 分镜 → 带字幕的成片，支持 Agent 与手动两种模式，批量并发运行。",
-      impact: "1 分钟成片 15–30 分钟 · ~90% 可直接发布 · 生产效率提升 2 倍",
+      impact: "1 分钟成片 15–30 分钟 · ~90% 无需人工返工 · 生产效率提升 2 倍",
       detail:
-        "基于 Temporal 与 PostgreSQL 的可恢复生产协调器：生成输入冻结为不可变快照，写入带幂等键与 CAS 版本校验，失败先分类再重试；批次允许部分成功，只重跑失败项，已完成的镜头不会重新生成。模型路由与兜底、语音修复、减少空镜的分镜规则、自动字幕与包装，让约 90% 的产出可以直接发布。每次文本模型调用都有完整轨迹（脱敏输入输出、缓存 token、流式断点、失败证据），用来排查慢调用和卡住的调用。可导出为可编辑的剪映草稿。约 1,900 次提交，约 5,000 个测试，外加 Playwright 端到端测试。",
+        "基于 Temporal 与 PostgreSQL 的可恢复生产协调器：生成输入冻结为不可变快照，写入带幂等键与 CAS 版本校验，失败先分类再重试；批次允许部分成功，只重跑失败项，已完成的镜头不会重新生成。模型路由与兜底、语音修复、减少空镜的分镜规则、自动字幕与包装，让约 90% 的产出无需人工返工，其余只需少量剪辑。每次文本模型调用都有完整轨迹（脱敏输入输出、缓存 token、流式断点、失败证据），用来排查慢调用和卡住的调用。可导出为可编辑的剪映草稿。约 5,000 个测试，外加 Playwright 端到端测试。",
     },
   },
   {
@@ -313,7 +313,7 @@ export const PROJECTS: Project[] = [
     category: ["agent", "ai"],
     summary:
       "Turned OpenChatCut, a local-first single-user agentic video editor, into a multi-tenant SaaS where editors and agents work on the same timeline.",
-    impact: "multi-tenant SaaS · dozens of internal users · ~1,500 commits",
+    impact: "multi-tenant SaaS · used across business lines",
     detail:
       "Workspaces, roles and feature grants; a shared asset library with a governed tag tree; resumable browser-to-cloud bulk upload; a template-driven production center that yields one editable project per output; semantic media search and ASR. Underneath, separate agent, generation, export and media workers run on Postgres leases with fencing tokens, checkpointed agent turns, human-decision states and per-call idempotency keys — paid or irreversible tools escalate to a person instead of replaying. A session-bound, revision-safe MCP server lets external agents edit the same timeline.",
     stack: ["TypeScript", "React", "Remotion", "Node.js", "PostgreSQL", "MCP"],
@@ -322,7 +322,7 @@ export const PROJECTS: Project[] = [
       name: "唯镜 Studio",
       role: "Agent 工程师 · 唯西",
       summary: "把本地优先、单用户的开源 Agent 剪辑器 OpenChatCut 改造成多租户 SaaS，剪辑师和 Agent 在同一条时间线上协作。",
-      impact: "多租户 SaaS · 几十名内部用户 · 约 1,500 次提交",
+      impact: "多租户 SaaS · 多条业务线在用",
       detail:
         "工作区、角色与功能授权；带受控标签树的共享素材库；可续传的浏览器直传云端批量上传；按模板批量生产、每个产出对应一个可编辑工程的生产中心；语义素材检索与 ASR。底层是独立的 Agent、生成、导出与媒体 Worker，基于带 fencing token 的 Postgres 租约、可断点恢复的 Agent 回合、人工决策状态和逐次调用幂等键运行——付费或不可逆的工具交给人工确认，而不是盲目重放。会话绑定、带版本校验的 MCP 服务让外部 Agent 也能编辑同一条时间线。",
     },
@@ -335,7 +335,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     category: ["agent", "ai"],
     summary:
-      "Novel-to-series writing with 6 stage contracts and 13 role agents on the Pi agent SDK; humans approve every atomic edit set.",
+      "Novel-to-series writing across 6 stage contracts — each stage single-lead, drawing on 13 role agents — on the Pi agent SDK; humans approve every atomic edit set.",
     impact: "eval: specialists cost 3.7× tokens for no quality gain → kept off",
     detail:
       "Per-stage tool allowlists; fixed, versioned knowledge prefixes keep prompt caching effective; workspace files stay the single source of truth and are re-attached after compaction; sessions are append-only JSONL with checkpoints. OpenTelemetry metrics drive alerts on agent-run failure ratio and stalled human decisions, alongside an append-only audit log. An eval harness compared single-lead and specialist-assisted runs on quality, tokens and latency: the specialists cost 3.7× tokens for no measurable gain, so production stayed single-lead.",
@@ -344,7 +344,7 @@ export const PROJECTS: Project[] = [
     zh: {
       name: "剧本多 Agent 工作室",
       role: "Agent 工程师 · 唯西",
-      summary: "小说改编剧集：6 个阶段契约、13 个角色 Agent，基于 Pi Agent SDK；每一组原子修改都由人工批准。",
+      summary: "小说改编剧集：6 个阶段契约，每个阶段由一个 Lead 主导、调用 13 个角色 Agent，基于 Pi Agent SDK；每一组原子修改都由人工批准。",
       impact: "评测：专家协作多花 3.7 倍 token、质量无提升 → 不上线",
       detail:
         "按阶段配置工具白名单；固定、带版本的知识前缀保证 prompt 缓存命中；工作区文件是唯一事实来源，上下文压缩后重新挂载；会话为只追加的 JSONL 并有检查点。OpenTelemetry 指标驱动告警（Agent 运行失败率、人工决策积压），另有只追加的审计日志。评测框架对比了单 Lead 与专家协作两种模式的质量、token 与延迟：专家模式多花 3.7 倍 token 却没有可测量的提升，因此生产环境保持单 Lead。",
@@ -361,7 +361,7 @@ export const PROJECTS: Project[] = [
       "URL in, product demo video out — browser agents explore a product in cloud sandboxes, record a walkthrough and render it into a demo.",
     impact: "Ant Group MaShang AI Accelerator · trial customers",
     detail:
-      "A breadth scan, then parallel per-section depth agents on Stagehand and Playwright in AgentBay cloud sandboxes, with a coverage ledger and retry rounds, a risk gate before data-changing actions, hard payment blocks and memory compaction for long runs. When the agent hits a login wall, a person signs in on the same browser profile over CDP and the agent restores the session and carries on. Explore, record and render run as BullMQ jobs behind an OpenAI / Anthropic / Gemini gateway; GSAP and Remotion render agents compose the final video. 209 commits, ~500 tests.",
+      "A breadth scan, then parallel per-section depth agents on Stagehand and Playwright in AgentBay cloud sandboxes, with a coverage ledger and retry rounds, a risk gate before data-changing actions, hard payment blocks and memory compaction for long runs. When the agent hits a login wall, a person signs in on the same browser profile over CDP and the agent restores the session and carries on. Explore, record and render run as BullMQ jobs behind an OpenAI / Anthropic / Gemini gateway; GSAP and Remotion render agents compose the final video. ~500 tests.",
     stack: ["Node.js", "Stagehand", "Playwright", "AgentBay", "BullMQ", "Remotion"],
     links: [],
     zh: {
@@ -369,7 +369,7 @@ export const PROJECTS: Project[] = [
       summary: "输入网址，输出产品 Demo 视频——浏览器 Agent 在云端沙箱里探索产品、录制演示，再渲染成片。",
       impact: "入选蚂蚁集团蚂上加速器 · 有试用客户",
       detail:
-        "先做广度扫描，再按版块并行派出深度探索 Agent（Stagehand + Playwright，运行在 AgentBay 云沙箱），配合覆盖账本与补漏重试、修改数据前的风险闸门、支付硬拦截，以及长任务的记忆压缩。遇到登录墙时，用户通过 CDP 在同一个浏览器 profile 中登录，Agent 恢复会话后继续。探索、录制、渲染都是 BullMQ 任务，统一接入 OpenAI / Anthropic / Gemini 网关；GSAP 与 Remotion 渲染 Agent 合成最终视频。209 次提交，约 500 个测试。",
+        "先做广度扫描，再按版块并行派出深度探索 Agent（Stagehand + Playwright，运行在 AgentBay 云沙箱），配合覆盖账本与补漏重试、修改数据前的风险闸门、支付硬拦截，以及长任务的记忆压缩。遇到登录墙时，用户通过 CDP 在同一个浏览器 profile 中登录，Agent 恢复会话后继续。探索、录制、渲染都是 BullMQ 任务，统一接入 OpenAI / Anthropic / Gemini 网关；GSAP 与 Remotion 渲染 Agent 合成最终视频。约 500 个测试。",
     },
   },
   {
@@ -381,7 +381,7 @@ export const PROJECTS: Project[] = [
     category: ["agent", "ai"],
     summary:
       "Open-source multi-agent harness that runs inside Claude Code or Codex and adapts a novel into a series — analysis, episode plans, scripts, reviews and storyboards.",
-    impact: "175★ · 33 forks · grown by my own promotion",
+    impact: "175★ · 33 forks",
     detail:
       "17 role agents and 25 skills. A review director gates every episode, and failures loop back for rewrite and re-review. The next phase is derived from which files exist, and per-project agent state lets work resume within an episode and reset between episodes to avoid context overflow. Hybrid ChromaDB + jieba TF-IDF retrieval grounds the writing in reference scripts.",
     stack: ["Agent Skills", "Python", "ChromaDB", "Claude Code", "Codex"],
@@ -390,7 +390,7 @@ export const PROJECTS: Project[] = [
       name: "小说改编多 Agent 团队",
       role: "作者 · 维护者",
       summary: "开源的多 Agent 框架，运行在 Claude Code 或 Codex 里，把小说改编成剧集——从分析、分集规划到剧本、审稿和分镜。",
-      impact: "175★ · 33 个 fork · 靠自己推广",
+      impact: "175★ · 33 个 fork",
       detail:
         "17 个角色 Agent、25 个 Skill。审稿总监把关每一集，不通过就打回重写再审。下一阶段由已存在的文件推导，每个项目有独立的 Agent 状态，同一集内可断点续写，跨集时重置以避免上下文溢出。ChromaDB + jieba TF-IDF 混合检索，用参考剧本为写作提供依据。",
     },
@@ -404,7 +404,7 @@ export const PROJECTS: Project[] = [
     category: ["ai"],
     summary:
       "Upload a film, get a shot-by-shot breakdown — scene detection, Qwen vision analysis and speech recognition on one inspectable timeline, exported to Excel or PDF.",
-    impact: "24★ · 107 end-to-end tests",
+    impact: "107 end-to-end tests",
     detail:
       "Each shot is analysed for size, camera movement, lighting and narrative function and aligned with its transcript, plus a whole-film continuity report. Long videos route to a single whole-video pass or overlapping chunked passes, with deduplicated transcripts, bounded model concurrency and retries. RQ workers stream SSE progress that survives a page refresh.",
     stack: ["FastAPI", "Redis / RQ", "React", "TypeScript", "Qwen"],
@@ -413,7 +413,7 @@ export const PROJECTS: Project[] = [
       name: "ShotLoom 拉片台",
       role: "作者 · 维护者",
       summary: "上传一部片子，得到逐镜头拉片——镜头检测、Qwen 视觉分析与语音识别对齐在同一条可检查的时间线上，可导出 Excel 或 PDF。",
-      impact: "24★ · 107 个端到端测试",
+      impact: "107 个端到端测试",
       detail:
         "逐镜头分析景别、运镜、光线与叙事功能并对齐台词，另生成全片连贯性报告。长视频按长度走整片一次分析或重叠分段分析，台词去重、模型并发有上限并支持重试。RQ Worker 通过 SSE 推送进度，刷新页面也不会丢。",
     },
@@ -496,7 +496,7 @@ export const PROJECTS: Project[] = [
       "Pay for an AI deliverable, not a chatbot: agent jobs run in an AgentSkillOS runtime while escrow, refunds and revenue sharing settle on HashKey Chain.",
     impact: "2nd · DeFi Track, HashKey Chain Horizon Hackathon 2026",
     detail:
-      "The FastAPI backend dispatches paid jobs to an AgentSkillOS subprocess that streams DAG status, logs and artifacts back, keeping agent execution apart from seven Foundry contracts for escrow, settlement, refunds and machine revenue claims. 173 commits.",
+      "The FastAPI backend dispatches paid jobs to an AgentSkillOS subprocess that streams DAG status, logs and artifacts back, keeping agent execution apart from seven Foundry contracts for escrow, settlement, refunds and machine revenue claims.",
     stack: ["FastAPI", "AgentSkillOS", "Solidity", "Foundry"],
     links: [{ label: "github", href: "https://github.com/Contrarian3-Labs/OutcomeX" }],
     zh: {
@@ -504,7 +504,7 @@ export const PROJECTS: Project[] = [
       summary: "为 AI 交付结果付费，而不是为聊天付费：Agent 任务在 AgentSkillOS 中执行，托管、退款与收益分成在 HashKey Chain 上结算。",
       impact: "HashKey Chain Horizon 黑客松 2026 · DeFi 赛道第二名",
       detail:
-        "FastAPI 后端把付费任务派发给 AgentSkillOS 子进程，实时回传 DAG 状态、日志与产物；Agent 执行与 7 个负责托管、结算、退款和机器收益领取的 Foundry 合约相互隔离。173 次提交。",
+        "FastAPI 后端把付费任务派发给 AgentSkillOS 子进程，实时回传 DAG 状态、日志与产物；Agent 执行与 7 个负责托管、结算、退款和机器收益领取的 Foundry 合约相互隔离。",
     },
   },
   {

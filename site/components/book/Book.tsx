@@ -482,7 +482,7 @@ export default function Book({ lang }: { lang: Lang }) {
       r: (
         <>
           {pagehead(lang === "zh" ? CHAPTERS[0].zh : CHAPTERS[0].en)}
-          <Entry id="novel-to-script" note={lang === "zh" ? "自己推到 175 星" : "175 stars, self-promoted"} />
+          <Entry id="novel-to-script" note={lang === "zh" ? "GitHub 175 星" : "175 stars on GitHub"} />
           <Entry id="shotloom" />
           <p className="b-end">❦</p>
           <div className="b-folio">{folio("4", 8)}</div>
