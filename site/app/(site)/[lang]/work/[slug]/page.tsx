@@ -56,8 +56,14 @@ export default async function CasePage({
 
       <header className="case-head wrap">
         <Link href={`/${l}/work`} className="case-back mono">
-          ← {l === "zh" ? "全部作品" : "All work"}
+          ← {l === "zh" ? "作品目录" : "Catalogue"}
         </Link>
+        <div className="case-mast mono">
+          <span>
+            No. {String(i + 1).padStart(2, "0")} · {p.category.map((c) => CATEGORY_LABEL[l][c]).join(" · ")}
+          </span>
+          <span>{p.year}</span>
+        </div>
         <Reveal>
           <h1 className="case-name">{p.name}</h1>
         </Reveal>
@@ -98,9 +104,16 @@ export default async function CasePage({
       <div className="wrap">
         {p.detail && (
           <div className="case-body">
+            <h2 className="case-cross">{l === "zh" ? "这件作品" : "The work"}</h2>
             <p>{p.detail}</p>
           </div>
         )}
+        <div className="case-orn" aria-hidden>
+          ⁂
+        </div>
+        <div className="case-imprint">
+          <h2 className="case-cross">{l === "zh" ? "所用技术" : "Built with"}</h2>
+        </div>
         <div className="case-stack">
           {p.stack.map((s) => (
             <span key={s} className="ptag">

@@ -18,19 +18,20 @@ function seedOf(s: string) {
   };
 }
 
-// Dark, cohesive cover palette — category only biases the pick.
-const BASES = ["#141a4a", "#3a1418", "#0f2e2c", "#1b1b1d", "#2a1733"];
+// Bookcloth palette — each category leans to its chapter ribbon in the book
+// (agents: ink blue, full-stack & on-chain: oxblood, research: green, hackathon: ochre).
+const BASES = ["#1c2766", "#55201a", "#0f4136", "#2a2118", "#5e4416"];
 const BASE_BIAS: Record<string, number[]> = {
-  agent: [0, 3, 2, 0, 1],
-  ai: [0, 2, 3, 0, 4],
-  web3: [1, 3, 4, 0, 1],
-  research: [3, 2, 0, 3, 4],
-  hackathon: [4, 0, 1, 2, 3],
+  agent: [0, 0, 0, 3],
+  ai: [3, 3, 0, 2],
+  web3: [1, 1, 1, 3],
+  research: [2, 2, 2, 3],
+  hackathon: [4, 4, 1, 0],
 };
-const ACCENTS = ["#2f3bff", "#ff5a1f", "#5be3b4", "#f2f0eb"];
-const PAPER = "rgba(242,240,235,1)";
-const S1 = "rgba(242,240,235,0.45)"; // main strokes
-const S2 = "rgba(242,240,235,0.16)"; // secondary strokes
+const ACCENTS = ["#e9c46a", "#e08a5f", "#9fd8bd", "#efe5cd"];
+const PAPER = "rgba(239,229,205,1)";
+const S1 = "rgba(239,229,205,0.5)"; // main strokes
+const S2 = "rgba(239,229,205,0.17)"; // secondary strokes
 
 const RATIOS: Record<string, [number, number]> = {
   wide: [800, 450], // 16:9

@@ -44,14 +44,19 @@ export default async function WorkPage({
           <h1 className="sec-title">
             {l === "zh" ? (
               <>
-                全部<em>作品</em>
+                作品<em>目录</em>
               </>
             ) : (
               <>
-                All <em>Work</em>
+                Catalogue of <em>Works</em>
               </>
             )}
           </h1>
+          <p className="sec-stand">
+            {l === "zh"
+              ? "由近及远：先是 2026 年的生产级 Agent 系统，再往前是全栈、链上与研究作品，一直到 2021 年。"
+              : "Newest first — production agent systems from 2026, then full-stack, on-chain and research work going back to 2021."}
+          </p>
         </Reveal>
         <span className="sec-no">
           {PROJECTS.length} {t.projects}

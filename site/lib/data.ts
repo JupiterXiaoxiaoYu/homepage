@@ -127,7 +127,7 @@ export const WORK: Work[] = [
       "Sole engineer, frontend to agent runtime, on four internal AI video-production products",
       "Agent mode turns a script into a finished 1-minute episode in 15–30 min; ~90% need no manual re-editing",
       "Doubled production efficiency vs. manual editing; dozens of internal users across business lines",
-      "Durable agent runtimes, MCP tools, OpenTelemetry alerts and eval harnesses that decide what ships",
+      "Agent tasks that survive crashes, MCP tools for outside agents, alerts on failing runs, and evals that decide what ships",
     ],
     zh: {
       role: "Agent 工程师",
@@ -135,7 +135,7 @@ export const WORK: Work[] = [
         "四个内部 AI 视频生产产品的唯一工程师，从前端一直做到 Agent 运行时",
         "Agent 模式下 1 分钟成片从剧本到出片 15–30 分钟，约 90% 无需人工返工",
         "相比人工剪辑生产效率提升 2 倍，几十名内部用户、覆盖多条业务线",
-        "可恢复的 Agent 运行时、MCP 工具、OpenTelemetry 告警，以及决定什么能上线的评测框架",
+        "崩溃后能继续的 Agent 任务、供外部 Agent 使用的 MCP 工具、失败告警，以及决定什么能上线的评测",
       ],
     },
   },
@@ -147,13 +147,13 @@ export const WORK: Work[] = [
     period: "2026.05 — 2026.06",
     points: [
       "URL in, product demo video out: browser agents explore products in cloud sandboxes and render demos",
-      "Human login handoff over CDP; explore / record / render queues; trial customers",
+      "When an agent hits a login page, the user signs in once and it carries on; trial customers",
     ],
     zh: {
       role: "创始人 & 独立工程师",
       points: [
         "输入网址、输出产品 Demo 视频：浏览器 Agent 在云端沙箱里探索产品并渲染成片",
-        "通过 CDP 交接人工登录；探索 / 录制 / 渲染任务队列；有试用客户",
+        "遇到登录页时用户登录一次，Agent 就能继续；有试用客户",
       ],
     },
   },
@@ -165,7 +165,7 @@ export const WORK: Work[] = [
     period: "2024.11 — 2026.07",
     points: [
       "Promoted to Ecosystem Director (Jun 2025); remote, alongside the MPhil",
-      "Rebuilt the zkWASM browser SDK and wrote the dApp-starter CLI",
+      "Rebuilt the zkWASM browser SDK and wrote the CLI that scaffolds new apps",
       "Solo-built staking, launchpad, prediction-market and social-binder apps — thousands of users, multi-million-USD TVL",
       "Led the team behind a hosted Kubernetes deployment platform running 10+ projects",
     ],
@@ -173,7 +173,7 @@ export const WORK: Work[] = [
       role: "生态总监 / DevRel 工程师",
       points: [
         "2025 年 6 月晋升生态总监；远程工作，与 MPhil 学业并行",
-        "从零重写 zkWASM 浏览器 SDK，编写 dApp 脚手架 CLI",
+        "从零重写 zkWASM 浏览器 SDK，编写生成新应用骨架的 CLI",
         "独立开发 Staking、Launchpad、预测市场与社交绑定应用——数千用户、数百万美元 TVL",
         "带队搭建托管式 Kubernetes 部署平台，承载 10+ 个项目",
       ],
@@ -292,7 +292,7 @@ export const PROJECTS: Project[] = [
       "AI short-drama and ad production: script → cast and scenes → storyboard → finished, subtitled video, in agent or manual mode, batched and run in parallel.",
     impact: "1-min episode in 15–30 min · ~90% need no manual re-edit · 2× production efficiency",
     detail:
-      "A durable production coordinator on Temporal and PostgreSQL. Generation inputs are frozen into immutable snapshots, writes use idempotency keys and compare-and-set checks, failures are classified before retrying, and batches allow partial success — only failed items rerun, finished shots are never regenerated. Model routing and fallback, voice repair, storyboard rules that avoid empty shots, and automatic subtitles and packaging mean ~90% of outputs need no manual re-editing; the rest need only light edits. Every text-model call is traced (redacted I/O, cached tokens, stream checkpoints, failure evidence) so slow or stuck calls can be diagnosed. Exports to editable CapCut (Jianying) drafts. ~5,000 tests plus Playwright end-to-end.",
+      "Agent mode takes a script through cast and scenes, storyboard and video to a finished, subtitled episode — about 15–30 minutes for a one-minute episode, with many episodes running in parallel. If a model call fails mid-batch, only the failed shots rerun, so finished shots are never regenerated or paid for twice. Bad generations fall back to another model or get their voice repaired, storyboard rules keep empty shots out, and subtitles and packaging are automatic — about 90% of episodes need no manual re-editing. Every model call is logged with its inputs, tokens and errors, so a slow or stuck job can be traced to the exact call. Episodes export as editable CapCut (Jianying) drafts. ~5,000 tests plus browser end-to-end tests.",
     stack: ["React 19", "FastAPI", "Temporal", "PostgreSQL", "SSE", "Seedance", "Qwen"],
     links: [],
     zh: {
@@ -301,7 +301,7 @@ export const PROJECTS: Project[] = [
       summary: "AI 短剧与广告生产：剧本 → 角色与场景 → 分镜 → 带字幕的成片，支持 Agent 与手动两种模式，批量并发运行。",
       impact: "1 分钟成片 15–30 分钟 · ~90% 无需人工返工 · 生产效率提升 2 倍",
       detail:
-        "基于 Temporal 与 PostgreSQL 的可恢复生产协调器：生成输入冻结为不可变快照，写入带幂等键与 CAS 版本校验，失败先分类再重试；批次允许部分成功，只重跑失败项，已完成的镜头不会重新生成。模型路由与兜底、语音修复、减少空镜的分镜规则、自动字幕与包装，让约 90% 的产出无需人工返工，其余只需少量剪辑。每次文本模型调用都有完整轨迹（脱敏输入输出、缓存 token、流式断点、失败证据），用来排查慢调用和卡住的调用。可导出为可编辑的剪映草稿。约 5,000 个测试，外加 Playwright 端到端测试。",
+        "Agent 模式把剧本依次做成角色与场景、分镜、视频，直到带字幕的成片——1 分钟成片约 15–30 分钟，多集可以并行。批量生成中某次模型调用失败时，只重跑失败的镜头，已完成的镜头不会重新生成，也不会重复付费。生成效果不好时自动换模型或修复配音，分镜规则避免空镜，字幕和包装自动完成——约 90% 的成片无需人工返工。每次模型调用都记录输入、token 和报错，任务变慢或卡住时能定位到具体是哪一次调用。成片可导出为可编辑的剪映草稿。约 5,000 个测试，外加浏览器端到端测试。",
     },
   },
   {
@@ -315,7 +315,7 @@ export const PROJECTS: Project[] = [
       "Turned OpenChatCut, a local-first single-user agentic video editor, into a multi-tenant SaaS where editors and agents work on the same timeline.",
     impact: "multi-tenant SaaS · used across business lines",
     detail:
-      "Workspaces, roles and feature grants; a shared asset library with a governed tag tree; resumable browser-to-cloud bulk upload; a template-driven production center that yields one editable project per output; semantic media search and ASR. Underneath, separate agent, generation, export and media workers run on Postgres leases with fencing tokens, checkpointed agent turns, human-decision states and per-call idempotency keys — paid or irreversible tools escalate to a person instead of replaying. A session-bound, revision-safe MCP server lets external agents edit the same timeline.",
+      "Added what a team needs: workspaces, roles and feature permissions, a shared asset library with a managed tag tree, bulk upload from the browser that resumes after a dropped connection, and a production center that turns one template into a batch of editable projects; plus semantic media search and speech recognition. Agent work runs in separate workers that survive crashes and resume where they stopped. A paid or irreversible tool call is never retried blindly — if its outcome is unclear, a person decides. Through MCP, outside agents can edit the same timeline as people without overwriting their changes.",
     stack: ["TypeScript", "React", "Remotion", "Node.js", "PostgreSQL", "MCP"],
     links: [],
     zh: {
@@ -324,7 +324,7 @@ export const PROJECTS: Project[] = [
       summary: "把本地优先、单用户的开源 Agent 剪辑器 OpenChatCut 改造成多租户 SaaS，剪辑师和 Agent 在同一条时间线上协作。",
       impact: "多租户 SaaS · 多条业务线在用",
       detail:
-        "工作区、角色与功能授权；带受控标签树的共享素材库；可续传的浏览器直传云端批量上传；按模板批量生产、每个产出对应一个可编辑工程的生产中心；语义素材检索与 ASR。底层是独立的 Agent、生成、导出与媒体 Worker，基于带 fencing token 的 Postgres 租约、可断点恢复的 Agent 回合、人工决策状态和逐次调用幂等键运行——付费或不可逆的工具交给人工确认，而不是盲目重放。会话绑定、带版本校验的 MCP 服务让外部 Agent 也能编辑同一条时间线。",
+        "补上团队协作需要的一切：工作区、角色与功能权限、带受控标签树的共享素材库、断网后能续传的浏览器批量上传，以及用一个模板批量生成可编辑工程的生产中心；另有语义素材检索和语音识别。Agent 任务在独立的 Worker 里运行，进程崩溃后能从中断处继续。付费或不可逆的工具调用绝不盲目重试——结果不明时交给人决定。通过 MCP，外部 Agent 也能编辑同一条时间线，而不会覆盖人的修改。",
     },
   },
   {
@@ -335,19 +335,19 @@ export const PROJECTS: Project[] = [
     year: "2026",
     category: ["agent", "ai"],
     summary:
-      "Novel-to-series writing across 6 stage contracts — each stage single-lead, drawing on 13 role agents — on the Pi agent SDK; humans approve every atomic edit set.",
+      "A writers' room of agents that adapts a novel into a series across six stages, with writers approving every edit before it lands.",
     impact: "eval: specialists cost 3.7× tokens for no quality gain → kept off",
     detail:
-      "Per-stage tool allowlists; fixed, versioned knowledge prefixes keep prompt caching effective; workspace files stay the single source of truth and are re-attached after compaction; sessions are append-only JSONL with checkpoints. OpenTelemetry metrics drive alerts on agent-run failure ratio and stalled human decisions, alongside an append-only audit log. An eval harness compared single-lead and specialist-assisted runs on quality, tokens and latency: the specialists cost 3.7× tokens for no measurable gain, so production stayed single-lead.",
+      "An eval compared a single lead agent with a lead plus specialists on quality, tokens and latency. The specialists cost 3.7× the tokens for no measurable gain, so every stage runs one lead agent. Drafts live in files rather than chat history, so long sessions can be compressed without losing work. Each stage only gets the tools it needs; writers approve every edit; alerts fire when agent runs start failing or a decision waits too long, and every change is kept in an audit log.",
     stack: ["FastAPI", "Bun", "Pi agent SDK", "PostgreSQL", "OpenTelemetry"],
     links: [],
     zh: {
       name: "剧本多 Agent 工作室",
       role: "Agent 工程师 · 唯西",
-      summary: "小说改编剧集：6 个阶段契约，每个阶段由一个 Lead 主导、调用 13 个角色 Agent，基于 Pi Agent SDK；每一组原子修改都由人工批准。",
+      summary: "由 Agent 组成的编剧室，分六个阶段把小说改编成剧集，每一处修改都要编剧批准后才生效。",
       impact: "评测：专家协作多花 3.7 倍 token、质量无提升 → 不上线",
       detail:
-        "按阶段配置工具白名单；固定、带版本的知识前缀保证 prompt 缓存命中；工作区文件是唯一事实来源，上下文压缩后重新挂载；会话为只追加的 JSONL 并有检查点。OpenTelemetry 指标驱动告警（Agent 运行失败率、人工决策积压），另有只追加的审计日志。评测框架对比了单 Lead 与专家协作两种模式的质量、token 与延迟：专家模式多花 3.7 倍 token 却没有可测量的提升，因此生产环境保持单 Lead。",
+        "用评测对比了“单个主导 Agent”与“主导 + 专家 Agent”两种方式的质量、token 和耗时：专家方式多花 3.7 倍 token，质量却没有可测量的提升，所以每个阶段只用一个主导 Agent。草稿保存在文件里而不是对话记录里，长会话压缩上下文时不会丢稿。每个阶段只开放它需要的工具；每处修改都由编剧批准；Agent 运行开始频繁失败、或某个决定等太久时会触发告警，所有改动都有审计记录。",
     },
   },
   {
@@ -361,7 +361,7 @@ export const PROJECTS: Project[] = [
       "URL in, product demo video out — browser agents explore a product in cloud sandboxes, record a walkthrough and render it into a demo.",
     impact: "Ant Group MaShang AI Accelerator · trial customers",
     detail:
-      "A breadth scan, then parallel per-section depth agents on Stagehand and Playwright in AgentBay cloud sandboxes, with a coverage ledger and retry rounds, a risk gate before data-changing actions, hard payment blocks and memory compaction for long runs. When the agent hits a login wall, a person signs in on the same browser profile over CDP and the agent restores the session and carries on. Explore, record and render run as BullMQ jobs behind an OpenAI / Anthropic / Gemini gateway; GSAP and Remotion render agents compose the final video. ~500 tests.",
+      "Browser agents first map the product, then explore each section in parallel in cloud sandboxes, keeping track of what they have covered and going back for anything missed. Any action that changes data needs a check first, and payments are blocked outright. When an agent hits a login page, the user signs in once in the same browser and the agent carries on from there. Explore, record and render run as separate job queues, and each step picks its own model from OpenAI, Anthropic or Gemini; render agents (GSAP, Remotion) cut the recordings into the finished demo. ~500 tests.",
     stack: ["Node.js", "Stagehand", "Playwright", "AgentBay", "BullMQ", "Remotion"],
     links: [],
     zh: {
@@ -369,7 +369,7 @@ export const PROJECTS: Project[] = [
       summary: "输入网址，输出产品 Demo 视频——浏览器 Agent 在云端沙箱里探索产品、录制演示，再渲染成片。",
       impact: "入选蚂蚁集团蚂上加速器 · 有试用客户",
       detail:
-        "先做广度扫描，再按版块并行派出深度探索 Agent（Stagehand + Playwright，运行在 AgentBay 云沙箱），配合覆盖账本与补漏重试、修改数据前的风险闸门、支付硬拦截，以及长任务的记忆压缩。遇到登录墙时，用户通过 CDP 在同一个浏览器 profile 中登录，Agent 恢复会话后继续。探索、录制、渲染都是 BullMQ 任务，统一接入 OpenAI / Anthropic / Gemini 网关；GSAP 与 Remotion 渲染 Agent 合成最终视频。约 500 个测试。",
+        "浏览器 Agent 先摸清产品结构，再在云端沙箱里并行探索每个版块，记录已经覆盖的地方，遗漏的再回头补。任何会修改数据的操作都要先过一道检查，支付操作直接禁止。遇到登录页时，用户在同一个浏览器里登录一次，Agent 就能接着往下走。探索、录制、渲染是三条独立的任务队列，每一步各自选用 OpenAI、Anthropic 或 Gemini 的模型；渲染 Agent（GSAP、Remotion）把录屏剪成最终的 Demo。约 500 个测试。",
     },
   },
   {
@@ -383,7 +383,7 @@ export const PROJECTS: Project[] = [
       "Open-source multi-agent harness that runs inside Claude Code or Codex and adapts a novel into a series — analysis, episode plans, scripts, reviews and storyboards.",
     impact: "175★ · 33 forks",
     detail:
-      "17 role agents and 25 skills. A review director gates every episode, and failures loop back for rewrite and re-review. The next phase is derived from which files exist, and per-project agent state lets work resume within an episode and reset between episodes to avoid context overflow. Hybrid ChromaDB + jieba TF-IDF retrieval grounds the writing in reference scripts.",
+      "17 role agents and 25 skills. A review director checks every episode and sends failures back for rewriting. Progress is saved to files, so a run can stop and resume at any episode without the context window filling up. Hybrid ChromaDB + TF-IDF search pulls similar reference scripts to ground the writing.",
     stack: ["Agent Skills", "Python", "ChromaDB", "Claude Code", "Codex"],
     links: [{ label: "github", href: "https://github.com/Supreme-Ultimate/novel-to-script-team" }],
     zh: {
@@ -392,7 +392,7 @@ export const PROJECTS: Project[] = [
       summary: "开源的多 Agent 框架，运行在 Claude Code 或 Codex 里，把小说改编成剧集——从分析、分集规划到剧本、审稿和分镜。",
       impact: "175★ · 33 个 fork",
       detail:
-        "17 个角色 Agent、25 个 Skill。审稿总监把关每一集，不通过就打回重写再审。下一阶段由已存在的文件推导，每个项目有独立的 Agent 状态，同一集内可断点续写，跨集时重置以避免上下文溢出。ChromaDB + jieba TF-IDF 混合检索，用参考剧本为写作提供依据。",
+        "17 个角色 Agent、25 个 Skill。审稿总监检查每一集，不合格就打回重写。进度保存在文件里，可以在任意一集停下再继续，上下文窗口不会被撑满。ChromaDB + TF-IDF 混合检索找出相似的参考剧本，为写作提供依据。",
     },
   },
   {
@@ -406,7 +406,7 @@ export const PROJECTS: Project[] = [
       "Upload a film, get a shot-by-shot breakdown — scene detection, Qwen vision analysis and speech recognition on one inspectable timeline, exported to Excel or PDF.",
     impact: "107 end-to-end tests",
     detail:
-      "Each shot is analysed for size, camera movement, lighting and narrative function and aligned with its transcript, plus a whole-film continuity report. Long videos route to a single whole-video pass or overlapping chunked passes, with deduplicated transcripts, bounded model concurrency and retries. RQ workers stream SSE progress that survives a page refresh.",
+      "Each shot is analysed for size, camera movement, lighting and narrative function and lined up with its dialogue, plus a continuity report for the whole film. Long films are split into overlapping chunks so no scene is lost at a boundary; progress streams live and survives a page refresh.",
     stack: ["FastAPI", "Redis / RQ", "React", "TypeScript", "Qwen"],
     links: [{ label: "github", href: "https://github.com/Supreme-Ultimate/shotloom" }],
     zh: {
@@ -415,7 +415,7 @@ export const PROJECTS: Project[] = [
       summary: "上传一部片子，得到逐镜头拉片——镜头检测、Qwen 视觉分析与语音识别对齐在同一条可检查的时间线上，可导出 Excel 或 PDF。",
       impact: "107 个端到端测试",
       detail:
-        "逐镜头分析景别、运镜、光线与叙事功能并对齐台词，另生成全片连贯性报告。长视频按长度走整片一次分析或重叠分段分析，台词去重、模型并发有上限并支持重试。RQ Worker 通过 SSE 推送进度，刷新页面也不会丢。",
+        "逐镜头分析景别、运镜、光线和叙事作用，并与台词对齐，另生成全片连贯性报告。长片切成相互重叠的片段分析，不会在切分处漏掉镜头；进度实时推送，刷新页面也不会丢。",
     },
   },
   {
@@ -429,7 +429,7 @@ export const PROJECTS: Project[] = [
       "Two tools in daily production: an unattended uploader that pushes drama assets to an ad platform for review, and a GPU pipeline that masks sensitive objects in video.",
     impact: "in production",
     detail:
-      "The uploader persists its intent and takes a one-time authorization before every irreversible write; a lost receipt triggers read-only reconciliation instead of a resubmit; per-file checkpoints skip published files after a restart; and a failing drama is quarantined while the rest of the queue carries on. The redaction pipeline detects and masks 13 object classes, with a Label Studio annotation loop, RF-DETR fine-tuning and TensorRT export, a lease-based job API and a timeline review UI.",
+      "The uploader batch-submits drama assets for review without anyone watching. If the platform's reply is lost, it checks what actually happened instead of resubmitting, so nothing is uploaded or sent for review twice; restarts skip files already published, and one failing drama is set aside while the rest carry on. The redaction pipeline detects and masks 13 kinds of objects in video, with a Label Studio annotation loop, RF-DETR fine-tuning and TensorRT export, a GPU job queue and a timeline review UI.",
     stack: ["C# / .NET", "SQLite", "FastAPI", "React", "RF-DETR", "TensorRT"],
     links: [],
     zh: {
@@ -438,7 +438,7 @@ export const PROJECTS: Project[] = [
       summary: "两个每天在线运行的工具：一个无人值守地把短剧素材上传到广告平台并送审，一个用 GPU 自动为视频打码。",
       impact: "已上线",
       detail:
-        "上传工具在每次不可逆写入前先持久化意图并领取一次性授权；回执丢失时只做只读核对，绝不盲目重提；按文件设检查点，重启后跳过已发布的文件；某部剧出错就单独隔离，其余队列继续运行。打码流水线识别并遮挡 13 类目标，包含 Label Studio 标注闭环、RF-DETR 微调与 TensorRT 导出、基于租约的任务 API 和时间轴审核界面。",
+        "上传工具无人值守地批量提交短剧素材送审。平台回执丢失时，先去核实实际结果再决定，绝不直接重提，所以不会重复上传或重复送审；重启后跳过已发布的文件，某部剧出错就先搁置，其余继续。打码流水线能识别并遮挡视频中的 13 类目标，配有 Label Studio 标注闭环、RF-DETR 微调与 TensorRT 导出、GPU 任务队列和时间轴审核界面。",
     },
   },
   {
@@ -449,19 +449,19 @@ export const PROJECTS: Project[] = [
     year: "2026",
     category: ["agent", "ai", "research"],
     summary:
-      "Ontology-driven writer/director agent: multimodal video analysis becomes evidence-anchored event graphs that a tool-using writer agent drafts from.",
+      "A writing agent for short-video scripts: it analyses reference videos, maps what happens and why, and drafts new scripts from that map.",
     impact: "14 ablation / LLM-judge experiments decide what stays",
     detail:
-      "Nine least-privilege tools over frozen, provenance-labelled context (observation, interpretation, inference, proposal). The experiments included a 2,560-judgment A/A reliability check on the LLM judge; prompt mechanisms that showed no measurable gain were removed.",
+      "The agent keeps what it observed in a video apart from what it inferred, and can only reach the tools its job needs. Fourteen controlled experiments with an LLM judge — after first checking the judge agreed with itself across 2,560 repeat judgments — decided which prompt techniques stayed; anything that did not measurably help was removed.",
     stack: ["TanStack Start", "Vercel AI SDK", "PostgreSQL", "pgvector", "Qwen"],
     links: [],
     zh: {
       name: "唯灵创意引擎",
       role: "Agent 工程师 · 唯西",
-      summary: "本体驱动的编导 Agent：多模态视频分析生成带证据锚点的事件图谱，再由会用工具的写作 Agent 据此出稿。",
+      summary: "短视频编导 Agent：分析参考视频，梳理出“发生了什么、为什么有效”，再据此写出新脚本。",
       impact: "14 组消融 / LLM 评审实验决定保留什么",
       detail:
-        "9 个最小权限工具，作用在冻结且标注了来源类型（观察、解读、推断、提议）的上下文上。实验包括对 LLM 评审做 2,560 次判断的 A/A 一致性检验；没有可测量收益的提示机制都被删除。",
+        "Agent 会把“在视频里看到的”和“自己推断的”分开记录，并且只能调用工作需要的工具。先用 2,560 次重复判断确认 LLM 评审自身前后一致，再做了 14 组对照实验，决定哪些提示技巧保留；没有可测量收益的一律删掉。",
     },
   },
   {
@@ -493,18 +493,18 @@ export const PROJECTS: Project[] = [
     year: "2026",
     category: ["agent", "web3", "hackathon"],
     summary:
-      "Pay for an AI deliverable, not a chatbot: agent jobs run in an AgentSkillOS runtime while escrow, refunds and revenue sharing settle on HashKey Chain.",
+      "Pay for an AI deliverable, not a chatbot: an agent runtime does the work, and payment sits in escrow on HashKey Chain until the buyer accepts.",
     impact: "2nd · DeFi Track, HashKey Chain Horizon Hackathon 2026",
     detail:
-      "The FastAPI backend dispatches paid jobs to an AgentSkillOS subprocess that streams DAG status, logs and artifacts back, keeping agent execution apart from seven Foundry contracts for escrow, settlement, refunds and machine revenue claims.",
+      "The backend hands each paid job to AgentSkillOS, an open-source agent runtime, and streams its progress and results back to the buyer. Money never touches the agent: seven Foundry contracts handle escrow, settlement, refunds and revenue sharing for the machines that did the work.",
     stack: ["FastAPI", "AgentSkillOS", "Solidity", "Foundry"],
     links: [{ label: "github", href: "https://github.com/Contrarian3-Labs/OutcomeX" }],
     zh: {
       role: "独立开发者",
-      summary: "为 AI 交付结果付费，而不是为聊天付费：Agent 任务在 AgentSkillOS 中执行，托管、退款与收益分成在 HashKey Chain 上结算。",
+      summary: "为 AI 交付的结果付费，而不是为聊天付费：Agent 完成任务，款项托管在 HashKey Chain 上，买家验收后才放款。",
       impact: "HashKey Chain Horizon 黑客松 2026 · DeFi 赛道第二名",
       detail:
-        "FastAPI 后端把付费任务派发给 AgentSkillOS 子进程，实时回传 DAG 状态、日志与产物；Agent 执行与 7 个负责托管、结算、退款和机器收益领取的 Foundry 合约相互隔离。",
+        "后端把每个付费任务交给开源 Agent 运行时 AgentSkillOS 执行，并把进度和结果实时推给买家。资金完全不经过 Agent：7 个 Foundry 合约负责托管、结算、退款，以及给执行任务的机器分成。",
     },
   },
   {
@@ -518,7 +518,7 @@ export const PROJECTS: Project[] = [
       "A handheld voice agent for crypto trading on an ESP32-S3 — speak to it, read the answer on screen, confirm every order with a button.",
     impact: "Champion · AVE CLAW Hackathon 2026",
     detail:
-      "Speech is routed to trading tools (feed, portfolio, watchlist, buy and sell) depending on the current screen, with paper and real trading. The LVGL interface is shared between the firmware and a desktop simulator. Later extracted into DeviceKit, an open framework with pluggable chain, ASR, LLM and TTS adapters and OTA updates.",
+      "What you say is routed to the right trading tool for the screen you are on — feed, portfolio, watchlist, buy or sell — with paper and real trading. The same interface code runs on the device and in a desktop simulator. Later turned into DeviceKit, an open framework where the chain, speech and language models can be swapped, with over-the-air updates.",
     stack: ["ESP32-S3", "C++", "LVGL", "Python"],
     links: [
       { label: "github", href: "https://github.com/JupiterXiaoxiaoYu/ava-trading-esp32" },
@@ -529,7 +529,7 @@ export const PROJECTS: Project[] = [
       summary: "跑在 ESP32-S3 上的掌上语音交易 Agent——对它说话，在屏幕上看结果，每一笔下单都要按键确认。",
       impact: "AVE CLAW 黑客松 2026 · 冠军",
       detail:
-        "根据当前页面把语音指令路由到交易工具（行情、持仓、自选、买卖），支持模拟盘与实盘。LVGL 界面在固件和桌面模拟器之间共用。之后抽象为开源框架 DeviceKit，可插拔链、ASR、LLM、TTS 适配器，并支持 OTA 升级。",
+        "根据当前所在页面，把语音指令交给对应的交易工具——行情、持仓、自选、买卖，支持模拟盘和实盘。同一套界面代码同时跑在设备和桌面模拟器上。之后整理成开源框架 DeviceKit：链、语音和语言模型都可以替换，并支持远程升级。",
     },
   },
   {
@@ -818,7 +818,7 @@ export const PROJECTS: Project[] = [
       "The zkWASM developer and product surface at Delphinus Lab — a rebuilt browser SDK, a dApp-starter CLI, staking, launchpad and prediction-market apps, and a hosted Kubernetes deployment platform.",
     impact: "thousands of users · multi-million-USD TVL · 10+ projects on the K8s platform",
     detail:
-      "Rebuilt the zkWASM browser SDK from scratch (unified wallet context, L1/L2 signing and deposits) and wrote the dApp-starter CLI; maintained the TypeScript mini-rollup services for deposits and settlement. Solo-built staking, launchpad, prediction-market and social-binder apps, plus the zkWASM Hub site and developer docs, and ran DevOps for 8+ ecosystem apps. Led the team that built a hosted Kubernetes deployment platform with GitHub integration, Helm jobs, async status and log tracking, and CI/CD.",
+      "Rebuilt the zkWASM browser SDK from scratch so apps use one wallet connection across both chain layers, wrote the CLI that scaffolds new apps, and maintained the TypeScript services that settle deposits and withdrawals. Solo-built staking, launchpad, prediction-market and social-binder apps, plus the zkWASM Hub site and developer docs, and ran operations for 8+ ecosystem apps. Led the team behind a hosted Kubernetes platform where developers deploy straight from GitHub and watch build status and logs live.",
     stack: ["TypeScript", "zkWASM", "React", "Kubernetes", "Helm", "CI/CD"],
     links: [
       { label: "hub", href: "https://zkwasmhub.com/" },
@@ -831,7 +831,7 @@ export const PROJECTS: Project[] = [
         "Delphinus Lab 的 zkWASM 开发者与产品矩阵——重写的浏览器 SDK、dApp 脚手架 CLI、Staking / Launchpad / 预测市场应用，以及托管式 Kubernetes 部署平台。",
       impact: "数千用户 · 数百万美元 TVL · K8s 平台承载 10+ 项目",
       detail:
-        "从零重写 zkWASM 浏览器 SDK（统一钱包上下文、L1/L2 签名与充值），编写 dApp 脚手架 CLI，维护负责充值与结算的 TypeScript mini-rollup 服务。独立开发 Staking、Launchpad、预测市场与社交绑定应用，以及 zkWASM Hub 官网与开发者文档，并负责 8+ 个生态应用的运维。带队搭建托管式 Kubernetes 部署平台：GitHub 集成、Helm 任务、异步状态与日志追踪、CI/CD。",
+        "从零重写 zkWASM 浏览器 SDK，让应用用一个钱包连接同时打通两层链；编写生成新应用骨架的 CLI；维护负责充值与提现结算的 TypeScript 服务。独立开发 Staking、Launchpad、预测市场与社交绑定应用，以及 zkWASM Hub 官网和开发者文档，并负责 8+ 个生态应用的运维。带队搭建托管式 Kubernetes 平台，开发者直接从 GitHub 部署，实时查看构建状态和日志。",
     },
   },
   {
