@@ -427,7 +427,7 @@ export const PROJECTS: Project[] = [
     category: ["agent", "ai"],
     summary:
       "Two tools in daily production: an unattended uploader that pushes drama assets to an ad platform for review, and a GPU pipeline that masks sensitive objects in video.",
-    impact: "in production",
+    impact: "replaced manual uploading · redaction at 2× real time, ~80% accuracy",
     detail:
       "The uploader batch-submits drama assets for review without anyone watching. If the platform's reply is lost, it checks what actually happened instead of resubmitting, so nothing is uploaded or sent for review twice; restarts skip files already published, and one failing drama is set aside while the rest carry on. The redaction pipeline detects and masks 13 kinds of objects in video, with a Label Studio annotation loop, RF-DETR fine-tuning and TensorRT export, a GPU job queue and a timeline review UI.",
     stack: ["C# / .NET", "SQLite", "FastAPI", "React", "RF-DETR", "TensorRT"],
@@ -436,7 +436,7 @@ export const PROJECTS: Project[] = [
       name: "唯西生产工具",
       role: "Agent 工程师 · 唯西",
       summary: "两个每天在线运行的工具：一个无人值守地把短剧素材上传到广告平台并送审，一个用 GPU 自动为视频打码。",
-      impact: "已上线",
+      impact: "取代人工上传 · 打码速度为视频时长的 2 倍、准确率约 80%",
       detail:
         "上传工具无人值守地批量提交短剧素材送审。平台回执丢失时，先去核实实际结果再决定，绝不直接重提，所以不会重复上传或重复送审；重启后跳过已发布的文件，某部剧出错就先搁置，其余继续。打码流水线能识别并遮挡视频中的 13 类目标，配有 Label Studio 标注闭环、RF-DETR 微调与 TensorRT 导出、GPU 任务队列和时间轴审核界面。",
     },
