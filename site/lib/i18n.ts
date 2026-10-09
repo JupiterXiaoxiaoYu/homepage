@@ -108,6 +108,6 @@ export function ui(lang: Lang): UIStrings {
 }
 
 export const CATEGORY_LABEL: Record<Lang, Record<string, string>> = {
-  en: { ai: "AI", web3: "Web3", research: "Research", hackathon: "Hackathon" },
-  zh: { ai: "AI", web3: "Web3", research: "研究", hackathon: "黑客松" },
+  en: { agent: "Agents", ai: "AI", web3: "Web3", research: "Research", hackathon: "Hackathon" },
+  zh: { agent: "智能体", ai: "AI", web3: "Web3", research: "研究", hackathon: "黑客松" },
 };

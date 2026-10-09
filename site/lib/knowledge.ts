@@ -17,7 +17,7 @@ export function buildCorpus(): string {
   L.push(`Tagline: ${PROFILE.tagline} / ${PROFILE.zh.tagline}`);
   L.push(`Positioning: ${PROFILE.positioning.en} / ${PROFILE.positioning.zh}`);
   L.push(`Bio: ${PROFILE.bio}`);
-  L.push(`Location: ${PROFILE.location}. Open to AI engineering roles.`);
+  L.push(`Location: ${PROFILE.location}. Open to agent engineering and full-stack roles.`);
   L.push(
     `Contact: ${PROFILE.email} · GitHub ${PROFILE.github} · LinkedIn ${PROFILE.linkedin} · Resume ${PROFILE.resume}`,
   );
@@ -52,7 +52,7 @@ export function buildCorpus(): string {
       L.push(`  Links: ${p.links.map((l) => `${l.label} ${l.href}`).join(" · ")}`);
   }
   L.push("");
-  L.push(`# Awards (${AWARDS.length} listed, 27+ total)`);
+  L.push(`# Awards (${AWARDS.length} hackathon and competition awards, 12 first place or champion)`);
   for (const a of AWARDS) L.push(`- ${a.year} ${a.event}: ${a.result}`);
   L.push("");
   L.push(`# Education`);

@@ -460,12 +460,12 @@ a { color: inherit; }
 }
 
 /* cursus vitae rows */
-.b-cv { margin-top: 18px; }
+.b-cv { margin-top: 8px; clear: both; }
 .b-cv-row {
   display: grid;
   grid-template-columns: 92px 1fr;
   gap: 2px 14px;
-  padding: 10px 0;
+  padding: 8px 0;
   border-bottom: 1px solid rgba(106, 93, 71, 0.18);
 }
 .b-cv-p {

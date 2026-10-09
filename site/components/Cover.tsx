@@ -21,6 +21,7 @@ function seedOf(s: string) {
 // Dark, cohesive cover palette — category only biases the pick.
 const BASES = ["#141a4a", "#3a1418", "#0f2e2c", "#1b1b1d", "#2a1733"];
 const BASE_BIAS: Record<string, number[]> = {
+  agent: [0, 3, 2, 0, 1],
   ai: [0, 2, 3, 0, 4],
   web3: [1, 3, 4, 0, 1],
   research: [3, 2, 0, 3, 4],

@@ -30,7 +30,7 @@ export default async function WorkPage({
       video: p.video,
     };
   });
-  const cats: Category[] = ["ai", "web3", "research", "hackathon"];
+  const cats: Category[] = ["agent", "ai", "web3", "research", "hackathon"];
   const filters = [
     { id: "all" as const, label: t.filterAll },
     ...cats.map((c) => ({ id: c, label: CATEGORY_LABEL[l][c] })),

@@ -35,31 +35,31 @@ const CHAPTERS: {
   spread: number;
 }[] = [
   {
-    key: "ai", en: "AI Works", zh: "智能之作", folio: "1", spread: 2,
+    key: "ai", en: "Agent Systems", zh: "智能体之作", folio: "1", spread: 2,
     intro: {
-      en: "Four systems where machine intelligence is the material, not the garnish — retrieval over a million-post social graph, decentralized audits of AI itself, an AIGC marketing engine, and a fraud model that took first place.",
-      zh: "四个以机器智能为材料、而非点缀的系统：面向百万帖社交图的检索、对 AI 本身的去中心化审计、AIGC 营销引擎、以及拿下第一名的反欺诈模型。",
+      en: "Production agent systems from 2026 — a drama studio that turns scripts into finished episodes, an editing SaaS that people and agents share, a writers' room of agents kept honest by evals, and browser agents that film product demos.",
+      zh: "生产级 Agent 系统，均成于 2026 年：把剧本变成成片的短剧工作台、人和 Agent 共用的剪辑 SaaS、靠评测把关的多 Agent 编剧室，以及会自己拍产品 Demo 的浏览器 Agent。",
     },
   },
   {
-    key: "web3", en: "On-Chain Works", zh: "链上之作", folio: "9", spread: 4,
+    key: "web3", en: "Full-Stack & On-Chain", zh: "全栈与链上", tabEn: "Full-Stack", folio: "9", spread: 4,
     intro: {
-      en: "Protocol work and product builds across eight chains — zkWASM infrastructure shipped end-to-end, a SocialFi world on Solana, and a string of protocol-level mechanisms.",
-      zh: "横跨八条链的协议与产品：端到端上线的 zkWASM 生态设施、Solana 上的 SocialFi 世界、以及一串协议层机制。",
+      en: "Products shipped across the stack — zkWASM apps with thousands of users, an agent-native messenger on three platforms, tools running in daily production, and two 2026 hackathon builds where agents meet settlement.",
+      zh: "横跨全栈的产品：数千用户的 zkWASM 应用、三端 Agent 原生通讯、每天在线运行的生产工具，以及两个让 Agent 与链上结算相遇的 2026 黑客松作品。",
     },
   },
   {
     key: "res", en: "Research Notes", zh: "研究手记", folio: "13", spread: 6,
     intro: {
-      en: "Two theses: local-first retrieval over decentralized social graphs, and formal verification of DeFi economic security.",
-      zh: "两篇论文主线：去中心化社交图上的本地优先检索，以及 DeFi 经济安全的形式化验证。",
+      en: "A first-author benchmark paper and the MPhil thesis — both about retrieval over social graphs that you can check.",
+      zh: "一篇一作基准论文与硕士论文——都关于社交图谱上可核验的检索。",
     },
   },
   {
     key: "hack", en: "Hackathon Ledger", zh: "黑客松账册", tabEn: "Hackathons", folio: "15", spread: 7,
     intro: {
-      en: "The running tally — twenty-seven and counting.",
-      zh: "持续更新的账册——二十七冠，还在涨。",
+      en: "Thirty-three awards and counting — twelve of them first place.",
+      zh: "三十三项奖，十二个第一，还在涨。",
     },
   },
   {
@@ -87,14 +87,12 @@ const T = {
     contents: "Contents",
     folio: "Fol.",
     chapter: "Chapter",
-    plateCaption: "Plate I. — Sovereign RAG: metapath retrieval over 1.36M posts",
-    metrics: ["79.3% accuracy", "<100ms latency", "1.36M posts", "$0 api cost"],
     colophon: "Set in EB Garamond · bound by hand, MMXXVI",
     exlibris: "EX LIBRIS",
     prev: "‹ Prev",
     next: "Next ›",
     hint: "scroll to read · tabs jump chapters · the index answers",
-    noMatch: "— no such entry; try “AI”, “fraud”, “marketing”…",
+    noMatch: "— no such entry; try “agent”, “drama”, “zkWASM”…",
     found: "— found at folio",
     awardsNote: "selection — full ledger runs to the appendix",
     appendix: "Appendix · Honours & CV",
@@ -119,14 +117,12 @@ const T = {
     contents: "目录",
     folio: "页",
     chapter: "第",
-    plateCaption: "图版 I —— Sovereign RAG：在 136 万帖之上的元路径检索",
-    metrics: ["79.3% 准确率", "<100ms 延迟", "136 万帖", "API 成本 $0"],
     colophon: "以 EB Garamond 排印 · 手工装订 · 二〇二六",
     exlibris: "藏书票",
     prev: "‹ 上一页",
     next: "下一页 ›",
     hint: "下滑阅读 · 标签跳章 · 索引会回答",
-    noMatch: "——查无此条；试试“AI”、“反欺诈”、“营销”…",
+    noMatch: "——查无此条；试试“Agent”、“短剧”、“zkWASM”…",
     found: "——见于第",
     awardsNote: "节选——完整账册见附录",
     appendix: "附录 · 荣誉与简历",
@@ -140,32 +136,40 @@ const T = {
 
 /* every citable entry: id → spread (and printed folio for the index) */
 const ENTRY_SPREAD: Record<string, number> = {
-  "sovereign-rag": 2,
-  trustai: 2,
-  martech3: 3,
-  antifraud: 3,
+  weichuang: 2,
+  "weixi-studio": 2,
+  "creative-engine": 2,
+  "screenplay-studio": 3,
+  resona: 3,
+  "novel-to-script": 3,
+  shotloom: 3,
   "zkwasm-suite": 4,
-  neurodaos: 4,
-  "social-chain": 5,
+  ringchat: 4,
+  outcomex: 5,
+  "ava-box": 5,
+  "production-tools": 5,
   "rosen-app": 5,
-  "nft-similarity": 5,
-  "daily-lens": 5,
-  "defi-formal": 6,
+  socialattributionqa: 6,
+  "sovereign-rag": 6,
   ...Object.fromEntries(WORK.flatMap((w) => [[w.id, 8], [`work-${w.id}`, 8]])),
 };
 
 const ENTRY_FOLIO: Record<string, number> = {
-  "sovereign-rag": 2,
-  trustai: 2,
-  martech3: 4,
-  antifraud: 4,
+  weichuang: 2,
+  "weixi-studio": 2,
+  "creative-engine": 2,
+  "screenplay-studio": 3,
+  resona: 3,
+  "novel-to-script": 4,
+  shotloom: 4,
   "zkwasm-suite": 10,
-  neurodaos: 10,
-  "social-chain": 11,
-  "rosen-app": 11,
-  "nft-similarity": 12,
-  "daily-lens": 12,
-  "defi-formal": 14,
+  ringchat: 10,
+  outcomex: 11,
+  "ava-box": 11,
+  "production-tools": 12,
+  "rosen-app": 12,
+  socialattributionqa: 14,
+  "sovereign-rag": 14,
 };
 
 const proj = (id: string, lang: Lang): Project =>
@@ -183,8 +187,16 @@ function score(q: string) {
     .filter((w) => w.length > 1 && !STOP.has(w));
   let best: { id: string; s: number } | null = null;
   for (const id of Object.keys(ENTRY_SPREAD)) {
-    const p = PROJECTS.find((x) => x.id === id)!;
-    const hay = `${p.name} ${p.role} ${p.category.join(" ")} ${p.summary} ${p.detail ?? ""} ${p.stack.join(" ")} ${p.zh?.name ?? ""} ${p.zh?.summary ?? ""}`.toLowerCase();
+    const p = PROJECTS.find((x) => x.id === id);
+    const r = RESEARCH.find((x) => x.id === id);
+    const hay = (
+      p
+        ? `${p.name} ${p.role} ${p.category.join(" ")} ${p.summary} ${p.detail ?? ""} ${p.stack.join(" ")} ${p.zh?.name ?? ""} ${p.zh?.summary ?? ""}`
+        : r
+          ? `${r.title} ${r.venue} ${r.summary} ${r.tags.join(" ")} ${r.zh?.summary ?? ""}`
+          : ""
+    ).toLowerCase();
+    if (!hay) continue;
     let s = 0;
     for (const t of toks) if (hay.includes(t)) s += t.length;
     if (!best || s > best.s) best = { id, s };
@@ -352,26 +364,6 @@ export default function Book({ lang }: { lang: Lang }) {
 
   const pagehead = (s: string) => <div className="b-pagehead">{s}</div>;
 
-  const plateFigure = (
-    <svg viewBox="0 0 320 210" className="b-fig" aria-hidden>
-      <g fill="none" stroke="#241d12" strokeWidth=".6">
-        <path d="M40 150 C 90 60, 150 40, 200 90 S 280 150, 300 60" strokeDasharray="1.5 3" />
-        <path d="M40 150 C 110 130, 160 150, 210 120 S 270 90, 300 60" />
-        {[40, 120, 210, 300].map((x, i) => (
-          <circle key={i} cx={x} cy={[150, 90, 120, 60][i]} r="3" fill="#241d12" stroke="none" />
-        ))}
-        {[85, 165, 255].map((x, i) => (
-          <circle key={i} cx={x} cy={[118, 108, 102][i]} r="2" fill="#241d12" stroke="none" />
-        ))}
-      </g>
-      <path d="M40 150 L 120 90 L 210 120 L 300 60" fill="none" stroke="#2f3bff" strokeWidth="1.6" />
-      <path d="M40 150 L 120 90 L 210 120 L 300 60" fill="none" stroke="#241d12" strokeWidth=".6" strokeDasharray="4 3" transform="translate(0,4)" />
-      <text x="122" y="82" fontSize="8" fill="#241d12" fontFamily="serif" fontStyle="italic">metapath</text>
-      <text x="16" y="165" fontSize="7" fill="#5c5142" fontFamily="monospace">query →</text>
-      <text x="284" y="48" fontSize="7" fill="#5c5142" fontFamily="monospace">→ answer</text>
-    </svg>
-  );
-
   const champs = AWARDS.filter((a) => /champion|1st|first/i.test(a.result)).slice(0, 9);
 
   /* ── spreads ────────────────────────────────────────────────────────────── */
@@ -463,41 +455,35 @@ export default function Book({ lang }: { lang: Lang }) {
         <>
           {pagehead(`${t.chapter} I`)}
           <ChapOpen idx={0} />
-          <p className="b-marg">{lang === "zh" ? "从检索开始入迷 ↓" : "got obsessed with retrieval here ↓"}</p>
+          <p className="b-marg">{lang === "zh" ? "从 harness 开始入迷 ↓" : "got obsessed with harnesses here ↓"}</p>
           <div className="b-folio">{folio("1", 5)}</div>
         </>
       ),
       r: (
         <>
           {pagehead(lang === "zh" ? CHAPTERS[0].zh : CHAPTERS[0].en)}
-          <Entry id="sovereign-rag" note={lang === "zh" ? "论文主线" : "the thesis thread"} />
-          <Entry id="trustai" />
-          <p className="b-fn"><sup>1</sup> {lang === "zh" ? "硕士论文，香港科技大学，进行中。" : "MPhil thesis, HKUST — work in progress."}</p>
+          <Entry id="weichuang" note={lang === "zh" ? "现在的正职" : "the day job"} />
+          <Entry id="weixi-studio" />
+          <Entry id="creative-engine" />
           <div className="b-folio">{folio("2", 6)}</div>
         </>
       ),
     },
-    /* 3 — plate + remaining AI entries */
+    /* 3 — chapter I continued */
     {
       l: (
         <>
           {pagehead(lang === "zh" ? CHAPTERS[0].zh : CHAPTERS[0].en)}
-          <figure className="b-plate">
-            <span className="b-tape tl" /><span className="b-tape br" />
-            {plateFigure}
-            <figcaption>{t.plateCaption}</figcaption>
-          </figure>
-          <ul className="b-metrics">
-            {t.metrics.map((m) => <li key={m}>{m}</li>)}
-          </ul>
+          <Entry id="screenplay-studio" note={lang === "zh" ? "评测说不" : "the eval said no"} />
+          <Entry id="resona" />
           <div className="b-folio">{folio("3", 7)}</div>
         </>
       ),
       r: (
         <>
           {pagehead(lang === "zh" ? CHAPTERS[0].zh : CHAPTERS[0].en)}
-          <Entry id="martech3" note={lang === "zh" ? "AIGC×Web3 试水" : "AIGC × Web3"} />
-          <Entry id="antifraud" note={lang === "zh" ? "拿了第一名" : "1st place — nice"} />
+          <Entry id="novel-to-script" note={lang === "zh" ? "自己推到 175 星" : "175 stars, self-promoted"} />
+          <Entry id="shotloom" />
           <p className="b-end">❦</p>
           <div className="b-folio">{folio("4", 8)}</div>
         </>
@@ -516,8 +502,8 @@ export default function Book({ lang }: { lang: Lang }) {
       r: (
         <>
           {pagehead(lang === "zh" ? CHAPTERS[1].zh : CHAPTERS[1].en)}
-          <Entry id="zkwasm-suite" note={lang === "zh" ? "现在的正职" : "the day job"} />
-          <Entry id="neurodaos" />
+          <Entry id="zkwasm-suite" note={lang === "zh" ? "上一份正职" : "the last day job"} />
+          <Entry id="ringchat" />
           <div className="b-folio">{folio("10", 10)}</div>
         </>
       ),
@@ -527,22 +513,22 @@ export default function Book({ lang }: { lang: Lang }) {
       l: (
         <>
           {pagehead(lang === "zh" ? CHAPTERS[1].zh : CHAPTERS[1].en)}
-          <Entry id="social-chain" note={lang === "zh" ? "图谱执念的开始" : "graph obsession starts"} />
-          <Entry id="rosen-app" />
+          <Entry id="outcomex" />
+          <Entry id="ava-box" note={lang === "zh" ? "冠军作品" : "took the title"} />
           <div className="b-folio">{folio("11", 11)}</div>
         </>
       ),
       r: (
         <>
           {pagehead(lang === "zh" ? CHAPTERS[1].zh : CHAPTERS[1].en)}
-          <Entry id="nft-similarity" note={lang === "zh" ? "ML 定价机" : "ML oracle"} />
-          <Entry id="daily-lens" />
+          <Entry id="production-tools" />
+          <Entry id="rosen-app" />
           <p className="b-end">❦</p>
           <div className="b-folio">{folio("12", 12)}</div>
         </>
       ),
     },
-    /* 6 — chapter III research */
+
     {
       l: (
         <>
@@ -554,7 +540,7 @@ export default function Book({ lang }: { lang: Lang }) {
       r: (
         <>
           {pagehead(lang === "zh" ? CHAPTERS[2].zh : CHAPTERS[2].en)}
-          {RESEARCH.map((r) => {
+          {RESEARCH.slice(0, 2).map((r) => {
             const rr = loc(r, lang);
             return (
               <article className={`b-entry ${hl === r.id ? "hl" : ""}`} key={r.id} id={`ent-${r.id}`}>
@@ -608,7 +594,7 @@ export default function Book({ lang }: { lang: Lang }) {
           {pagehead(`${t.chapter} V`)}
           <ChapOpen idx={4} />
           <div className="b-cv">
-            {WORK.map((w) => {
+            {WORK.slice(0, 6).map((w) => {
               const wl = loc(w, lang);
               const wid = `work-${w.id}`;
               return (
@@ -661,8 +647,8 @@ export default function Book({ lang }: { lang: Lang }) {
             {answer && <p className="b-ans">{answer}</p>}
             <div className="b-chips">
               {(lang === "zh"
-                ? ["他做过什么 AI 项目？", "有什么 Web3 作品？", "黑客松成绩如何？", "他现在在哪工作？"]
-                : ["What has he built in AI?", "Any Web3 work?", "Hackathon record?", "Where does he work now?"]
+                ? ["Jupiter 做过哪些 Agent 系统？", "有什么全栈作品？", "黑客松成绩如何？", "Jupiter 现在在哪工作？"]
+                : ["What agent systems has Jupiter built?", "Any full-stack work?", "Hackathon record?", "Where does Jupiter work now?"]
               ).map((c) => (
                 <button key={c} onClick={() => ask(c)} disabled={busy}>{c}</button>
               ))}
@@ -819,7 +805,7 @@ function AskInline({ onAsk, lang, busy }: { onAsk: (q: string) => void; lang: La
         value={q}
         onChange={(e) => setQ(e.target.value)}
         disabled={busy}
-        placeholder={lang === "zh" ? "比如：他做过什么 AI 项目？" : "e.g. what has he built in AI?"}
+        placeholder={lang === "zh" ? "比如：Jupiter 做过哪些 Agent 系统？" : "e.g. what agent systems has Jupiter built?"}
         aria-label="ask"
       />
     </form>
