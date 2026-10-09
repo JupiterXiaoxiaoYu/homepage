@@ -937,6 +937,44 @@ video {
 }
 
 /* ── case study ────────────────────────────────────────────────────────── */
+.case-cover .cover {
+  max-height: 58vh;
+}
+.case-back {
+  display: inline-block;
+  margin-bottom: clamp(18px, 2.4vw, 30px);
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+.case-back:hover,
+.case-back:focus-visible {
+  color: var(--accent);
+}
+.case-impact {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: clamp(20px, 2.6vw, 32px);
+}
+.case-impact li {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: clamp(16px, 1.5vw, 21px);
+  padding: 8px 16px;
+  border: 1px solid var(--hair);
+  border-left: 3px solid var(--accent);
+  background: rgba(255, 255, 255, 0.45);
+}
+.wcard .wi {
+  margin-top: 8px;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 15.5px;
+  line-height: 1.35;
+  color: var(--muted);
+}
 .case-head {
   padding-block: clamp(40px, 6vw, 90px) clamp(30px, 4vw, 60px);
 }

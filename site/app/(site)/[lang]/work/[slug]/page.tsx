@@ -41,7 +41,7 @@ export default async function CasePage({
 
   return (
     <article>
-      <Reveal clip>
+      <Reveal clip className="case-cover">
         <Cover
           id={p.id}
           name={p.name}
@@ -55,12 +55,24 @@ export default async function CasePage({
       </Reveal>
 
       <header className="case-head wrap">
+        <Link href={`/${l}/work`} className="case-back mono">
+          ← {l === "zh" ? "全部作品" : "All work"}
+        </Link>
         <Reveal>
           <h1 className="case-name">{p.name}</h1>
         </Reveal>
         <Reveal delay={80}>
           <p className="case-sum">{p.summary}</p>
         </Reveal>
+        {p.impact && (
+          <Reveal delay={120}>
+            <ul className="case-impact">
+              {p.impact.split(" · ").map((m) => (
+                <li key={m}>{m}</li>
+              ))}
+            </ul>
+          </Reveal>
+        )}
         <div className="meta-grid">
           <div className="meta-cell">
             <div className="lb mono">{t.role}</div>
@@ -84,11 +96,11 @@ export default async function CasePage({
       </header>
 
       <div className="wrap">
-        <div className="case-body">
-          <p>{p.summary}</p>
-          {p.detail && <p>{p.detail}</p>}
-          {p.impact && <p className="pimpact">{p.impact}</p>}
-        </div>
+        {p.detail && (
+          <div className="case-body">
+            <p>{p.detail}</p>
+          </div>
+        )}
         <div className="case-stack">
           {p.stack.map((s) => (
             <span key={s} className="ptag">

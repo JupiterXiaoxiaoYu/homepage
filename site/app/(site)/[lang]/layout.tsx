@@ -15,7 +15,7 @@ export function generateStaticParams() {
 
 export const metadata: Metadata = {
   title: {
-    default: "Jupiter Yu — AI & Web3 Engineer",
+    default: "Jupiter Yu — Agent Engineer · Full-Stack",
     template: "%s — Jupiter Yu",
   },
   description: PROFILE.positioning.en,

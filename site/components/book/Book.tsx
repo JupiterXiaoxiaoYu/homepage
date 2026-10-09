@@ -30,40 +30,42 @@ const CHAPTERS: {
   en: string;
   zh: string;
   tabEn?: string;
+  short: { en: string; zh: string };
+  hash: string;
   folio: string;
   intro: { en: string; zh: string };
   spread: number;
 }[] = [
   {
-    key: "ai", en: "Agent Systems", zh: "智能体之作", folio: "1", spread: 2,
+    key: "ai", en: "Agent Systems", zh: "智能体之作", short: { en: "Agents", zh: "智能体" }, hash: "agents", folio: "1", spread: 2,
     intro: {
       en: "Production agent systems from 2026 — a drama studio that turns scripts into finished episodes, an editing SaaS that people and agents share, a writers' room of agents kept honest by evals, and browser agents that film product demos.",
       zh: "生产级 Agent 系统，均成于 2026 年：把剧本变成成片的短剧工作台、人和 Agent 共用的剪辑 SaaS、靠评测把关的多 Agent 编剧室，以及会自己拍产品 Demo 的浏览器 Agent。",
     },
   },
   {
-    key: "web3", en: "Full-Stack & On-Chain", zh: "全栈与链上", tabEn: "Full-Stack", folio: "9", spread: 4,
+    key: "web3", en: "Full-Stack & On-Chain", zh: "全栈与链上", tabEn: "Full-Stack", short: { en: "Stack", zh: "全栈" }, hash: "stack", folio: "9", spread: 4,
     intro: {
       en: "Products shipped across the stack — zkWASM apps with thousands of users, an agent-native messenger on three platforms, tools running in daily production, and two 2026 hackathon builds where agents meet settlement.",
       zh: "横跨全栈的产品：数千用户的 zkWASM 应用、三端 Agent 原生通讯、每天在线运行的生产工具，以及两个让 Agent 与链上结算相遇的 2026 黑客松作品。",
     },
   },
   {
-    key: "res", en: "Research Notes", zh: "研究手记", folio: "13", spread: 6,
+    key: "res", en: "Research Notes", zh: "研究手记", short: { en: "Research", zh: "研究" }, hash: "research", folio: "13", spread: 6,
     intro: {
       en: "A first-author benchmark paper and the MPhil thesis — both about retrieval over social graphs that you can check.",
       zh: "一篇一作基准论文与硕士论文——都关于社交图谱上可核验的检索。",
     },
   },
   {
-    key: "hack", en: "Hackathon Ledger", zh: "黑客松账册", tabEn: "Hackathons", folio: "15", spread: 7,
+    key: "hack", en: "Hackathon Ledger", zh: "黑客松账册", tabEn: "Hackathons", short: { en: "Awards", zh: "奖项" }, hash: "awards", folio: "15", spread: 7,
     intro: {
       en: "Thirty-three awards and counting — twelve of them first place.",
       zh: "三十三项奖，十二个第一，还在涨。",
     },
   },
   {
-    key: "me", en: "Cursus Vitae", zh: "生平", folio: "17", spread: 8,
+    key: "me", en: "Cursus Vitae", zh: "生平", short: { en: "CV", zh: "生平" }, hash: "cv", folio: "17", spread: 8,
     intro: {
       en: "Where the work happened, and where it was studied.",
       zh: "事在何处做，学在何处读。",
@@ -91,7 +93,27 @@ const T = {
     exlibris: "EX LIBRIS",
     prev: "‹ Prev",
     next: "Next ›",
-    hint: "scroll to read · tabs jump chapters · the index answers",
+    hint: "← → turn pages · tabs jump chapters",
+    glance: "At a Glance",
+    now: "Now",
+    before: "Before",
+    study: "Study",
+    nowV: "Agent Engineer at Viciking (full-time) — production agent systems for AI video",
+    beforeV: "Founder of Resona (browser agents) · Ecosystem Director, Delphinus Lab (zkWASM)",
+    studyV: "MPhil Data Science, HKUST (GZ) · MA Cognitive Science, Edinburgh (First)",
+    stats: [
+      ["15–30 min", "script → finished 1-min episode"],
+      ["~90%", "agent outputs need no manual re-edit"],
+      ["3.7×", "token waste an eval caught before shipping"],
+      ["33", "hackathon & competition awards, 12 firsts"],
+    ],
+    begin: "Begin reading",
+    allWork: "All work",
+    resume: "Résumé",
+    email: "Email",
+    work: "Work",
+    mPrev: "‹ Prev",
+    mNext: "Next ›",
     noMatch: "— no such entry; try “agent”, “drama”, “zkWASM”…",
     found: "— found at folio",
     awardsNote: "selection — full ledger runs to the appendix",
@@ -121,7 +143,27 @@ const T = {
     exlibris: "藏书票",
     prev: "‹ 上一页",
     next: "下一页 ›",
-    hint: "下滑阅读 · 标签跳章 · 索引会回答",
+    hint: "← → 翻页 · 标签跳章",
+    glance: "一览",
+    now: "现在",
+    before: "此前",
+    study: "求学",
+    nowV: "唯西 Agent 工程师（全职）——为 AI 视频生产构建生产级 Agent 系统",
+    beforeV: "Resona 创始人（浏览器 Agent）· Delphinus Lab 生态总监（zkWASM）",
+    studyV: "香港科技大学（广州）数据科学 MPhil · 爱丁堡大学认知科学 MA（一等）",
+    stats: [
+      ["15–30 分钟", "剧本 → 1 分钟成片"],
+      ["~90%", "Agent 产出无需人工返工"],
+      ["3.7×", "上线前被评测拦下的 token 浪费"],
+      ["33", "项黑客松与竞赛奖，12 个第一"],
+    ],
+    begin: "开始阅读",
+    allWork: "全部作品",
+    resume: "简历",
+    email: "邮箱",
+    work: "作品",
+    mPrev: "‹ 上一页",
+    mNext: "下一页 ›",
     noMatch: "——查无此条；试试“Agent”、“短剧”、“zkWASM”…",
     found: "——见于第",
     awardsNote: "节选——完整账册见附录",
@@ -224,6 +266,9 @@ export default function Book({ lang }: { lang: Lang }) {
       if (target === spread || leaf) return;
       const dir = target > spread ? 1 : -1;
       setLeaf({ dir, from: spread, to: target });
+      if (window.matchMedia("(max-width: 860px)").matches) {
+        bookRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
       setTurned(false);
       timers.current.push(
         setTimeout(() => setSpread(target), 300),
@@ -233,6 +278,17 @@ export default function Book({ lang }: { lang: Lang }) {
     [spread, leaf],
   );
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  useEffect(() => {
+    const fromHash = () => {
+      const h = window.location.hash.replace("#", "");
+      const c = CHAPTERS.find((x) => x.hash === h);
+      const target = c ? c.spread : h === "index" ? 9 : null;
+      if (target != null) setSpread(target);
+    };
+    fromHash();
+    window.addEventListener("hashchange", fromHash);
+    return () => window.removeEventListener("hashchange", fromHash);
+  }, []);
   useEffect(() => {
     if (!leaf) return;
     const r = requestAnimationFrame(() =>
@@ -325,7 +381,12 @@ export default function Book({ lang }: { lang: Lang }) {
     return (
       <article className={`b-entry ${hl === id ? "hl" : ""}`} id={`ent-${id}`}>
         <header>
-          <h3>{p.name}</h3>
+          <h3>
+            <Link href={`/${lang}/work/${id}`} className="b-elink">
+              {p.name}
+              <span className="b-earrow" aria-hidden> ↗</span>
+            </Link>
+          </h3>
           <div className="b-meta">
             {p.year} · {p.role} · {p.category.join(" · ").toUpperCase()}
           </div>
@@ -373,16 +434,27 @@ export default function Book({ lang }: { lang: Lang }) {
     {
       l: (
         <>
-          <div className="b-leather-note">
-            <div className="b-exlibris">
-              <div className="b-ex-frame">
-                <span>{t.exlibris}</span>
-                <strong>JY</strong>
-                <span className="b-ex-sub">{PROFILE.handle}</span>
-              </div>
+          <div className="b-glance">
+            <div className="b-glance-head">
+              <div className="b-seal b-seal-sm" aria-hidden><span>JY</span></div>
+              <p className="b-over">{t.glance}</p>
             </div>
-            <div className="b-seal" aria-hidden><span>JY</span></div>
-            <p className="b-marg b-marg-c">{t.specimen}</p>
+            <dl className="b-facts">
+              <dt>{t.now}</dt><dd>{t.nowV}</dd>
+              <dt>{t.before}</dt><dd>{t.beforeV}</dd>
+              <dt>{t.study}</dt><dd>{t.studyV}</dd>
+            </dl>
+            <ul className="b-stats">
+              {t.stats.map(([v, k]) => (
+                <li key={k}><strong>{v}</strong><span>{k}</span></li>
+              ))}
+            </ul>
+            <div className="b-cta">
+              <button className="b-btn b-btn-ink" onClick={() => go(1)}>{t.begin} →</button>
+              <Link className="b-btn" href={`/${lang}/work`}>{t.allWork}</Link>
+              <a className="b-btn" href={PROFILE.resume} target="_blank" rel="noreferrer">{t.resume} ↗</a>
+              <a className="b-btn" href={`mailto:${PROFILE.email}`}>{t.email}</a>
+            </div>
           </div>
           <div className="b-folio">{folio(t.folio + " ii", 1)}</div>
         </>
@@ -395,6 +467,7 @@ export default function Book({ lang }: { lang: Lang }) {
               <i className="b-fleuron bl">❦</i><i className="b-fleuron br">❦</i>
               <p className="b-over">{t.manuscript}</p>
               <h1>JUPITER&nbsp;YU</h1>
+              <p className="b-role">{lang === "zh" ? "Agent 工程师 · 全栈" : "Agent Engineer · Full-Stack"}</p>
               {engraved}
               <p className="b-pos">{PROFILE.positioning[lang]}</p>
               <p className="b-colophon">{t.colophon}</p>
@@ -424,10 +497,12 @@ export default function Book({ lang }: { lang: Lang }) {
           <ol className="b-toc">
             {CHAPTERS.map((c, i) => (
               <li key={c.key}>
-                <span className="b-toc-n">{["I", "II", "III", "IV", "V"][i]}.</span>
-                <span className="b-toc-t">{lang === "zh" ? c.zh : c.en}</span>
-                <span className="b-dots" />
-                <span className="b-toc-f">{c.folio}</span>
+                <button className="b-toc-go" onClick={() => go(c.spread)}>
+                  <span className="b-toc-n">{["I", "II", "III", "IV", "V"][i]}.</span>
+                  <span className="b-toc-t">{lang === "zh" ? c.zh : c.en}</span>
+                  <span className="b-dots" />
+                  <span className="b-toc-f">{c.folio}</span>
+                </button>
               </li>
             ))}
             <li className="b-toc-app">
@@ -726,13 +801,15 @@ export default function Book({ lang }: { lang: Lang }) {
         <span>JUPITER YU · {t.specimen}</span>
         <nav>
           <span className="b-hintline">{t.hint}</span>
+          <Link href={`/${lang}/work`}>{t.work}</Link>
+          <a href={PROFILE.resume} target="_blank" rel="noreferrer">{t.resume}</a>
           <Link href={lang === "zh" ? "/en" : "/zh"}>
             {lang === "zh" ? "EN" : "中文"}
           </Link>
         </nav>
       </header>
 
-      <div className="b-book" ref={bookRef}>
+      <div className={`b-book sp-${spread}`} ref={bookRef}>
         <div className="b-page left">
           <div className="b-page-in">{spreads[spread].l}</div>
           <button className="b-turn prev" onClick={() => go(Math.max(spread - 1, 0))} aria-label={t.prev}>
@@ -756,7 +833,8 @@ export default function Book({ lang }: { lang: Lang }) {
               role="tab"
               aria-label={lang === "zh" ? c.zh : c.en}
             >
-              <span>{lang === "zh" ? c.zh : (c.tabEn ?? c.en)}</span>
+              <span className="rib-full">{lang === "zh" ? c.zh : (c.tabEn ?? c.en)}</span>
+              <span className="rib-short">{c.short[lang]}</span>
             </button>
           ))}
           <button
@@ -766,7 +844,8 @@ export default function Book({ lang }: { lang: Lang }) {
             role="tab"
             aria-label={t.indexTitle}
           >
-            <span>{lang === "zh" ? "索引" : "Index"}</span>
+            <span className="rib-full">{lang === "zh" ? "索引" : "Index"}</span>
+            <span className="rib-short">{lang === "zh" ? "索引" : "Index"}</span>
           </button>
         </div>
 
@@ -775,6 +854,12 @@ export default function Book({ lang }: { lang: Lang }) {
             <span>{tab.label}</span>
           </div>
         )}
+
+        <nav className="b-mnav" aria-label="pages">
+          <button onClick={() => go(Math.max(spread - 1, 0))} disabled={spread === 0}>{t.mPrev}</button>
+          <span>{spread + 1} / {SPREADS}</span>
+          <button onClick={() => go(Math.min(spread + 1, SPREADS - 1))} disabled={spread === SPREADS - 1}>{t.mNext}</button>
+        </nav>
 
         {leaf && leafFaces && (
           <div className={`b-leaf ${leaf.dir === 1 ? "next" : "prev"} ${turned ? "turning" : ""}`}>

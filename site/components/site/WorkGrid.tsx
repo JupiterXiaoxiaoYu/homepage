@@ -12,6 +12,7 @@ type Item = {
   name: string;
   role: string;
   year: string;
+  impact?: string;
   category: Category[];
   cover?: string;
   video?: string;
@@ -87,6 +88,7 @@ export default function WorkGrid({
               <div className="wm mono">
                 {p.role} · {p.year}
               </div>
+              {p.impact && <div className="wi">{p.impact}</div>}
             </CaseLink>
           </div>
         ))}

@@ -23,7 +23,7 @@ export default function Nav({ lang, t }: { lang: Lang; t: UIStrings }) {
         <Link className="nav-link" href={`/${lang}/work`}>
           {t.work}
         </Link>
-        <Link className="nav-link hide-m" href={`/${lang}#about`}>
+        <Link className="nav-link hide-m" href={`/${lang}#cv`}>
           {t.about}
         </Link>
         <button className="nav-link" onClick={() => openAsk()}>

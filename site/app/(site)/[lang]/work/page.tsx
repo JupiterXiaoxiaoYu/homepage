@@ -25,6 +25,7 @@ export default async function WorkPage({
       name: p.name,
       role: p.role,
       year: p.year,
+      impact: p.impact,
       category: p.category as Category[],
       cover: p.cover,
       video: p.video,

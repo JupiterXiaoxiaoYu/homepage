@@ -3,8 +3,8 @@ import "../../fonts.css";
 import "../book.css";
 
 export const metadata: Metadata = {
-  title: "Jupiter Yu — A Working Manuscript",
-  description: "The collected works of Jupiter Yu, bound as a book that answers its readers.",
+  title: "Jupiter Yu — Agent Engineer · Full-Stack",
+  description: "Jupiter Yu builds production agent systems and the full-stack products around them. Projects, research and awards, bound as a book that answers its readers.",
   icons: { icon: "/icon.jpg" },
 };
 
