@@ -24,7 +24,7 @@ export const PROFILE = {
   stats: [
     { k: "hackathon & competition awards", v: "33" },
     { k: "first-place finishes", v: "12" },
-    { k: "agent outputs with no manual re-edit", v: "~90%" },
+    { k: "agent outputs ready for placement", v: "~90%" },
     { k: "open-source stars", v: "200" },
   ],
 };
@@ -125,35 +125,35 @@ export const WORK: Work[] = [
     current: true,
     points: [
       "Sole engineer, frontend to agent runtime, on four internal AI video-production products",
-      "Agent mode turns a script into a finished 1-minute episode in 15–30 min; ~90% need no manual re-editing",
+      "Agent mode turns a script into a finished 1-minute episode in 15–30 min; ~90% go straight to placement and delivery",
       "Doubled production efficiency vs. manual editing; dozens of internal users across business lines",
-      "Agent tasks that survive crashes, MCP tools for outside agents, alerts on failing runs, and evals that decide what ships",
+      "A multi-tenant editing SaaS running several production lines, a multi-agent writers' room, and evals that decide what ships",
     ],
     zh: {
       role: "Agent 工程师",
       points: [
         "四个内部 AI 视频生产产品的唯一工程师，从前端一直做到 Agent 运行时",
-        "Agent 模式下 1 分钟成片从剧本到出片 15–30 分钟，约 90% 无需人工返工",
+        "Agent 模式下 1 分钟成片从剧本到出片 15–30 分钟，约 90% 可直接投放和交付",
         "相比人工剪辑生产效率提升 2 倍，几十名内部用户、覆盖多条业务线",
-        "崩溃后能继续的 Agent 任务、供外部 Agent 使用的 MCP 工具、失败告警，以及决定什么能上线的评测",
+        "承载多条产线的多租户剪辑 SaaS、多 Agent 编剧流水线，以及决定什么能上线的评测",
       ],
     },
   },
   {
     id: "resona",
-    role: "Founder & Sole Engineer",
+    role: "Founder & CEO",
     org: "Resona",
     backing: "Ant Group MaShang AI Accelerator",
     period: "2026.05 — 2026.06",
     points: [
-      "URL in, product demo video out: browser agents explore products in cloud sandboxes and render demos",
-      "When an agent hits a login page, the user signs in once and it carries on; trial customers",
+      "The launch layer for AI-built products: paste a URL, get a launch kit in about 30 minutes",
+      "Team of three; built the entire product myself; trial customers",
     ],
     zh: {
-      role: "创始人 & 独立工程师",
+      role: "创始人兼 CEO",
       points: [
-        "输入网址、输出产品 Demo 视频：浏览器 Agent 在云端沙箱里探索产品并渲染成片",
-        "遇到登录页时用户登录一次，Agent 就能继续；有试用客户",
+        "AI 构建时代的“发布层”：粘贴产品网址，约 30 分钟拿到整套发布素材",
+        "三人创始团队，产品与工程由我独立完成；已有试用客户",
       ],
     },
   },
@@ -289,19 +289,19 @@ export const PROJECTS: Project[] = [
     year: "2026",
     category: ["agent", "ai"],
     summary:
-      "AI short-drama and ad production: script → cast and scenes → storyboard → finished, subtitled video, in agent or manual mode, batched and run in parallel.",
-    impact: "1-min episode in 15–30 min · ~90% need no manual re-edit · 2× production efficiency",
+      "AI short-drama and ad production from script to finished video: cast and scenes, storyboard, video, voice, subtitles and packaging, fully automatic or with editors stepping in.",
+    impact: "1-min episode in 15–30 min · ~90% ready for placement and delivery · 2× production efficiency",
     detail:
-      "Agent mode takes a script through cast and scenes, storyboard and video to a finished, subtitled episode — about 15–30 minutes for a one-minute episode, with many episodes running in parallel. If a model call fails mid-batch, only the failed shots rerun, so finished shots are never regenerated or paid for twice. Bad generations fall back to another model or get their voice repaired, storyboard rules keep empty shots out, and subtitles and packaging are automatic — about 90% of episodes need no manual re-editing. Every model call is logged with its inputs, tokens and errors, so a slow or stuck job can be traced to the exact call. Episodes export as editable CapCut (Jianying) drafts. ~5,000 tests plus browser end-to-end tests.",
+      "A one-minute episode takes 15–30 minutes from script to finished video, and about 90% go straight to ad placement and delivery; the rest need only light edits. One script can fan out into a hundred variants, episodes run in parallel, and editors can take over from the agent at any stage. It routes across Seedance, Qwen and Gemini with automatic fallback, uses storyboard rules to keep empty shots out, exports editable CapCut (Jianying) drafts, and comes with team permissions and cost accounting.",
     stack: ["React 19", "FastAPI", "Temporal", "PostgreSQL", "SSE", "Seedance", "Qwen"],
     links: [],
     zh: {
       name: "唯创 · AI 短剧工作台",
       role: "Agent 工程师 · 唯西",
-      summary: "AI 短剧与广告生产：剧本 → 角色与场景 → 分镜 → 带字幕的成片，支持 Agent 与手动两种模式，批量并发运行。",
-      impact: "1 分钟成片 15–30 分钟 · ~90% 无需人工返工 · 生产效率提升 2 倍",
+      summary: "AI 短剧与广告生产：打通“剧本 → 角色与场景 → 分镜 → 视频 → 配音、字幕与包装”全流程，可全自动出片，也可人工精修。",
+      impact: "1 分钟成片 15–30 分钟 · 约 90% 可直接投放和交付 · 生产效率提升一倍",
       detail:
-        "Agent 模式把剧本依次做成角色与场景、分镜、视频，直到带字幕的成片——1 分钟成片约 15–30 分钟，多集可以并行。批量生成中某次模型调用失败时，只重跑失败的镜头，已完成的镜头不会重新生成，也不会重复付费。生成效果不好时自动换模型或修复配音，分镜规则避免空镜，字幕和包装自动完成——约 90% 的成片无需人工返工。每次模型调用都记录输入、token 和报错，任务变慢或卡住时能定位到具体是哪一次调用。成片可导出为可编辑的剪映草稿。约 5,000 个测试，外加浏览器端到端测试。",
+        "1 分钟成片 15–30 分钟完成，约 90% 可直接用于投放和交付，其余只需少量精修。支持单个剧本批量裂变出上百条、多集并行生产，以及 Agent 自动与人工精修两种模式；接入 Seedance、Qwen、Gemini 等多家模型并自动兜底切换，用分镜规则减少空镜；成片可导出为剪映草稿继续精修，并配有团队权限与成本核算。",
     },
   },
   {
@@ -313,18 +313,18 @@ export const PROJECTS: Project[] = [
     category: ["agent", "ai"],
     summary:
       "Turned OpenChatCut, a local-first single-user agentic video editor, into a multi-tenant SaaS where editors and agents work on the same timeline.",
-    impact: "multi-tenant SaaS · used across business lines",
+    impact: "multi-tenant SaaS · several production lines on one platform",
     detail:
-      "Added what a team needs: workspaces, roles and feature permissions, a shared asset library with a managed tag tree, bulk upload from the browser that resumes after a dropped connection, and a production center that turns one template into a batch of editable projects; plus semantic media search and speech recognition. Agent work runs in separate workers that survive crashes and resume where they stopped. A paid or irreversible tool call is never retried blindly — if its outcome is unclear, a person decides. Through MCP, outside agents can edit the same timeline as people without overwriting their changes.",
+      "It runs several production lines on one platform — drama remix, social re-cuts, packaging, digital-human narration, AI pre-roll and recreation — which share an asset library, template-driven batch production, semantic search and cost reporting. Its agent runtime supports resumable long-running tasks and human approval for high-risk actions, and through MCP outside agents and editors work on the same timeline.",
     stack: ["TypeScript", "React", "Remotion", "Node.js", "PostgreSQL", "MCP"],
     links: [],
     zh: {
       name: "唯镜 Studio",
       role: "Agent 工程师 · 唯西",
       summary: "把本地优先、单用户的开源 Agent 剪辑器 OpenChatCut 改造成多租户 SaaS，剪辑师和 Agent 在同一条时间线上协作。",
-      impact: "多租户 SaaS · 多条业务线在用",
+      impact: "多租户 SaaS · 多条产线共用一个平台",
       detail:
-        "补上团队协作需要的一切：工作区、角色与功能权限、带受控标签树的共享素材库、断网后能续传的浏览器批量上传，以及用一个模板批量生成可编辑工程的生产中心；另有语义素材检索和语音识别。Agent 任务在独立的 Worker 里运行，进程崩溃后能从中断处继续。付费或不可逆的工具调用绝不盲目重试——结果不明时交给人决定。通过 MCP，外部 Agent 也能编辑同一条时间线，而不会覆盖人的修改。",
+        "平台承载短剧混剪、社交裂变二创、包装、数字人口播、AI 前贴与复刻等多条产线，各产线共用素材库、模板化批量生产、语义检索与成本统计。自研 Agent 运行时，支持长任务断点续跑和高风险操作人工审批；通过 MCP 开放编辑能力，外部 Agent 可与剪辑师协同编辑同一条时间线。",
     },
   },
   {
@@ -335,41 +335,41 @@ export const PROJECTS: Project[] = [
     year: "2026",
     category: ["agent", "ai"],
     summary:
-      "A writers' room of agents that adapts a novel into a series across six stages, with writers approving every edit before it lands.",
+      "A multi-agent pipeline that adapts novels into series across six stages and thirteen role agents, with writers approving each stage.",
     impact: "eval: specialists cost 3.7× tokens for no quality gain → kept off",
     detail:
-      "An eval compared a single lead agent with a lead plus specialists on quality, tokens and latency. The specialists cost 3.7× the tokens for no measurable gain, so every stage runs one lead agent. Drafts live in files rather than chat history, so long sessions can be compressed without losing work. Each stage only gets the tools it needs; writers approve every edit; alerts fire when agent runs start failing or a decision waits too long, and every change is kept in an audit log.",
+      "An eval compared a single lead agent with a lead plus specialists on quality, tokens and latency. The specialists cost 3.7× the tokens for no measurable gain, so every stage runs one lead agent.",
     stack: ["FastAPI", "Bun", "Pi agent SDK", "PostgreSQL", "OpenTelemetry"],
     links: [],
     zh: {
       name: "剧本多 Agent 工作室",
       role: "Agent 工程师 · 唯西",
-      summary: "由 Agent 组成的编剧室，分六个阶段把小说改编成剧集，每一处修改都要编剧批准后才生效。",
+      summary: "小说改编剧集的多 Agent 写作流水线：6 个阶段、13 个角色 Agent，编剧逐阶段审批。",
       impact: "评测：专家协作多花 3.7 倍 token、质量无提升 → 不上线",
       detail:
-        "用评测对比了“单个主导 Agent”与“主导 + 专家 Agent”两种方式的质量、token 和耗时：专家方式多花 3.7 倍 token，质量却没有可测量的提升，所以每个阶段只用一个主导 Agent。草稿保存在文件里而不是对话记录里，长会话压缩上下文时不会丢稿。每个阶段只开放它需要的工具；每处修改都由编剧批准；Agent 运行开始频繁失败、或某个决定等太久时会触发告警，所有改动都有审计记录。",
+        "自建评测对比“单主 Agent”与“主 Agent + 专家 Agent”两种方案的质量、token 与耗时：后者 token 消耗达 3.7 倍而质量无提升，据此确定各阶段均采用单主 Agent。",
     },
   },
   {
     id: "resona",
     name: "Resona",
     hash: "0xRES0N",
-    role: "Founder · Sole Engineer",
+    role: "Founder & CEO",
     year: "2026",
     category: ["agent", "ai"],
     summary:
-      "URL in, product demo video out — browser agents explore a product in cloud sandboxes, record a walkthrough and render it into a demo.",
-    impact: "Ant Group MaShang AI Accelerator · trial customers",
+      "The launch layer for AI-built products: paste a product URL and get a full launch kit made from the real running product.",
+    impact: "URL to launch kit in about 30 minutes · Ant Group MaShang AI Accelerator · trial customers",
     detail:
-      "Browser agents first map the product, then explore each section in parallel in cloud sandboxes, keeping track of what they have covered and going back for anything missed. Any action that changes data needs a check first, and payments are blocked outright. When an agent hits a login page, the user signs in once in the same browser and the agent carries on from there. Explore, record and render run as separate job queues, and each step picks its own model from OpenAI, Anthropic or Gemini; render agents (GSAP, Remotion) cut the recordings into the finished demo. ~500 tests.",
+      "Paste a URL and one sentence about what to show; about 30 minutes later you have a launch video, social cuts, screenshots, GIFs and copy — replacing 10–15 days of outsourced production. GUI agents (Stagehand, Playwright) operate the live product in parallel cloud sandboxes, get past login walls and unpredictable UI states, and judge which user path is worth showing; risky actions are gated and payments blocked. A compositional renderer then cuts real screen recordings, AI-generated code animation (GSAP, Remotion) and AI voiceover into one narrative. Founded with two co-founders; I built the entire product.",
     stack: ["Node.js", "Stagehand", "Playwright", "AgentBay", "BullMQ", "Remotion"],
     links: [],
     zh: {
-      role: "创始人 · 独立工程师",
-      summary: "输入网址，输出产品 Demo 视频——浏览器 Agent 在云端沙箱里探索产品、录制演示，再渲染成片。",
-      impact: "入选蚂蚁集团蚂上加速器 · 有试用客户",
+      role: "创始人兼 CEO",
+      summary: "AI 构建时代的“发布层”：粘贴产品网址，拿到一整套来自真实运行产品的发布素材。",
+      impact: "约 30 分钟从网址到发布素材 · 入选蚂蚁集团蚂上加速器 · 已有试用客户",
       detail:
-        "浏览器 Agent 先摸清产品结构，再在云端沙箱里并行探索每个版块，记录已经覆盖的地方，遗漏的再回头补。任何会修改数据的操作都要先过一道检查，支付操作直接禁止。遇到登录页时，用户在同一个浏览器里登录一次，Agent 就能接着往下走。探索、录制、渲染是三条独立的任务队列，每一步各自选用 OpenAI、Anthropic 或 Gemini 的模型；渲染 Agent（GSAP、Remotion）把录屏剪成最终的 Demo。约 500 个测试。",
+        "粘贴产品网址并用一句话说明想展示什么，约 30 分钟拿到发布视频、社媒短版、截图、GIF 与文案，替代原本 10–15 天的外包制作。GUI Agent（Stagehand、Playwright）在云端沙箱中并行操作真实产品，处理登录墙和不确定的界面状态，判断最值得展示的用户路径；涉及数据修改的操作须先通过风险检查，支付类操作一律拦截。组合式渲染再把真实录屏、AI 生成的代码动效（GSAP、Remotion）与 AI 配音按叙事节奏编排成片。三人创始团队，产品与工程由我独立完成。",
     },
   },
   {
@@ -383,7 +383,7 @@ export const PROJECTS: Project[] = [
       "Open-source multi-agent harness that runs inside Claude Code or Codex and adapts a novel into a series — analysis, episode plans, scripts, reviews and storyboards.",
     impact: "175★ · 33 forks",
     detail:
-      "17 role agents and 25 skills. A review director checks every episode and sends failures back for rewriting. Progress is saved to files, so a run can stop and resume at any episode without the context window filling up. Hybrid ChromaDB + TF-IDF search pulls similar reference scripts to ground the writing.",
+      "17 role agents and 25 skills. A review director checks every episode and sends failures back for rewriting. Long projects advance episode by episode and can stop and resume; hybrid ChromaDB + TF-IDF search pulls similar reference scripts to ground the writing; image and video tools batch-produce frames and clips from the storyboard.",
     stack: ["Agent Skills", "Python", "ChromaDB", "Claude Code", "Codex"],
     links: [{ label: "github", href: "https://github.com/Supreme-Ultimate/novel-to-script-team" }],
     zh: {
@@ -392,7 +392,7 @@ export const PROJECTS: Project[] = [
       summary: "开源的多 Agent 框架，运行在 Claude Code 或 Codex 里，把小说改编成剧集——从分析、分集规划到剧本、审稿和分镜。",
       impact: "175★ · 33 个 fork",
       detail:
-        "17 个角色 Agent、25 个 Skill。审稿总监检查每一集，不合格就打回重写。进度保存在文件里，可以在任意一集停下再继续，上下文窗口不会被撑满。ChromaDB + TF-IDF 混合检索找出相似的参考剧本，为写作提供依据。",
+        "17 个角色 Agent、25 个 Skill。审稿 Agent 逐集把关，不合格即退回重写。支持长篇项目分集推进、中断后续写；采用 ChromaDB + TF-IDF 混合检索召回相似参考剧本辅助写作；配套图片与视频生成工具，可按分镜批量产出画面与视频片段。",
     },
   },
   {
@@ -404,18 +404,18 @@ export const PROJECTS: Project[] = [
     category: ["ai"],
     summary:
       "Upload a film, get a shot-by-shot breakdown — scene detection, Qwen vision analysis and speech recognition on one inspectable timeline, exported to Excel or PDF.",
-    impact: "107 end-to-end tests",
+    impact: "open to the public · accounts and credits",
     detail:
-      "Each shot is analysed for size, camera movement, lighting and narrative function and lined up with its dialogue, plus a continuity report for the whole film. Long films are split into overlapping chunks so no scene is lost at a boundary; progress streams live and survives a page refresh.",
+      "Each shot is analysed for size, camera movement, lighting and narrative function and lined up with its dialogue, plus a continuity report for the whole film. Feature-length films are analysed in segments while keeping continuity, and results export as Excel or PDF breakdown reports.",
     stack: ["FastAPI", "Redis / RQ", "React", "TypeScript", "Qwen"],
     links: [{ label: "github", href: "https://github.com/Supreme-Ultimate/shotloom" }],
     zh: {
       name: "ShotLoom 拉片台",
       role: "作者 · 维护者",
       summary: "上传一部片子，得到逐镜头拉片——镜头检测、Qwen 视觉分析与语音识别对齐在同一条可检查的时间线上，可导出 Excel 或 PDF。",
-      impact: "107 个端到端测试",
+      impact: "已对外开放 · 带账号与积分体系",
       detail:
-        "逐镜头分析景别、运镜、光线和叙事作用，并与台词对齐，另生成全片连贯性报告。长片切成相互重叠的片段分析，不会在切分处漏掉镜头；进度实时推送，刷新页面也不会丢。",
+        "逐镜头分析景别、运镜、光线与叙事作用，并与台词对齐，另输出全片连贯性报告。长片自动分段分析并保持前后连贯，结果可导出为 Excel / PDF 拉片报告。",
     },
   },
   {
@@ -426,19 +426,19 @@ export const PROJECTS: Project[] = [
     year: "2026",
     category: ["agent", "ai"],
     summary:
-      "Two tools in daily production: an unattended uploader that pushes drama assets to an ad platform for review, and a GPU pipeline that masks sensitive objects in video.",
+      "Tooling around the team's clip pipeline: ported Weixi Studio's AI features into it, built the unattended uploader, and a GPU pipeline that masks sensitive objects in video.",
     impact: "replaced manual uploading · redaction at 2× real time, ~80% accuracy",
     detail:
-      "The uploader batch-submits drama assets for review without anyone watching. If the platform's reply is lost, it checks what actually happened instead of resubmitting, so nothing is uploaded or sent for review twice; restarts skip files already published, and one failing drama is set aside while the rest carry on. The redaction pipeline detects and masks 13 kinds of objects in video, with a Label Studio annotation loop, RF-DETR fine-tuning and TensorRT export, a GPU job queue and a timeline review UI.",
+      "Ported Weixi Studio's AI pre-roll, scene recreation, watermark removal and stitching into the team's v2 clip pipeline, and built the unattended uploader that ships its output to the ad platform, work previously done by hand. Separately built a GPU redaction pipeline that detects and masks 13 kinds of objects at 2× real time with about 80% accuracy, with a Label Studio annotation loop, RF-DETR fine-tuning and TensorRT export.",
     stack: ["C# / .NET", "SQLite", "FastAPI", "React", "RF-DETR", "TensorRT"],
     links: [],
     zh: {
       name: "唯西生产工具",
       role: "Agent 工程师 · 唯西",
-      summary: "两个每天在线运行的工具：一个无人值守地把短剧素材上传到广告平台并送审，一个用 GPU 自动为视频打码。",
+      summary: "围绕团队素材剪辑流水线的工具：把唯镜 Studio 的 AI 能力迁入流水线，开发无人值守上传工具，以及 GPU 视频打码流水线。",
       impact: "取代人工上传 · 打码速度为视频时长的 2 倍、准确率约 80%",
       detail:
-        "上传工具无人值守地批量提交短剧素材送审。平台回执丢失时，先去核实实际结果再决定，绝不直接重提，所以不会重复上传或重复送审；重启后跳过已发布的文件，某部剧出错就先搁置，其余继续。打码流水线能识别并遮挡视频中的 13 类目标，配有 Label Studio 标注闭环、RF-DETR 微调与 TensorRT 导出、GPU 任务队列和时间轴审核界面。",
+        "将唯镜 Studio 的 AI 前贴、复刻、去水印、拼接等能力迁入团队 v2 素材剪辑流水线，并开发无人值守上传工具，把产出投到广告平台，替代原有人工上传。另独立开发 GPU 视频打码流水线，可识别并遮挡 13 类目标，处理速度达视频时长的 2 倍、准确率约 80%，配有 Label Studio 标注闭环、RF-DETR 微调与 TensorRT 导出。",
     },
   },
   {
@@ -449,19 +449,19 @@ export const PROJECTS: Project[] = [
     year: "2026",
     category: ["agent", "ai", "research"],
     summary:
-      "A writing agent for short-video scripts: it analyses reference videos, maps what happens and why, and drafts new scripts from that map.",
-    impact: "14 ablation / LLM-judge experiments decide what stays",
+      "A writing workspace for short-video directors, built on a two-layer content ontology that explains why a reference video works and what in it can be borrowed.",
+    impact: "two-layer ontology · 14 controlled experiments decide what stays",
     detail:
-      "The agent keeps what it observed in a video apart from what it inferred, and can only reach the tools its job needs. Fourteen controlled experiments with an LLM judge — after first checking the judge agreed with itself across 2,560 repeat judgments — decided which prompt techniques stayed; anything that did not measurably help was removed.",
+      "The ontology has two layers: an abstract “implicit skeleton”, and an event graph anchored to evidence in the source. With it the engine breaks down a reference video and finds structurally similar material and cultural touchstones — classic stories, characters, scenes — for the director to borrow and recombine. Directors talk through their intent, pick a direction and get several differently written drafts. Fourteen controlled experiments with an LLM judge decided which mechanisms stayed.",
     stack: ["TanStack Start", "Vercel AI SDK", "PostgreSQL", "pgvector", "Qwen"],
     links: [],
     zh: {
       name: "唯灵创意引擎",
       role: "Agent 工程师 · 唯西",
-      summary: "短视频编导 Agent：分析参考视频，梳理出“发生了什么、为什么有效”，再据此写出新脚本。",
-      impact: "14 组消融 / LLM 评审实验决定保留什么",
+      summary: "面向短视频编导的创作工作台，基于两层内容本体，讲清一条参考视频为什么成立、其中哪些结构可以借用。",
+      impact: "两层内容本体 · 14 组对照实验决定保留什么",
       detail:
-        "Agent 会把“在视频里看到的”和“自己推断的”分开记录，并且只能调用工作需要的工具。先用 2,560 次重复判断确认 LLM 评审自身前后一致，再做了 14 组对照实验，决定哪些提示技巧保留；没有可测量收益的一律删掉。",
+        "本体分两层：抽象的“隐式骨架”，以及带原文证据的事件图谱。据此拆解参考视频，并在素材库与文化载体（经典故事、人物、桥段）之间找出同构关系，供编导借用和重组。编导在对话中理清意图、挑选方向，一次拿到多份写法不同的稿件。以 LLM 评审完成 14 组对照实验，只保留有实测收益的机制。",
     },
   },
   {
@@ -475,14 +475,14 @@ export const PROJECTS: Project[] = [
       "An agent-native messenger on Web, iOS and Android where every user gets a personal AI agent, built on Tinode and OpenClaw.",
     impact: "6-person team · continued by another team as Gold House",
     detail:
-      "Led the team and worked mainly on the clients. On Android, built the chat UI, optimistic media upload, contact and group search, unread badges and multi-device sync.",
+      "Led the team and worked mainly on the clients. On Android, built the core features: chat, media messages, search and multi-device sync.",
     stack: ["Kotlin", "Jetpack Compose", "React", "Go", "OpenClaw"],
     links: [],
     zh: {
       role: "团队负责人 · 客户端工程师",
       summary: "Agent 原生的即时通讯应用，覆盖 Web、iOS 与 Android，每位用户都有自己的 AI Agent，基于 Tinode 与 OpenClaw。",
       impact: "6 人团队 · 现由其他团队以黄金屋（Gold House）继续开发",
-      detail: "带领团队并主要负责客户端。在 Android 上实现了聊天界面、乐观发送的媒体上传、联系人与群组搜索、未读角标和多端同步。",
+      detail: "带领团队并主要负责客户端，在 Android 端完成聊天、媒体消息、搜索与多端同步等核心功能。",
     },
   },
   {

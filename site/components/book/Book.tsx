@@ -103,7 +103,7 @@ const T = {
     studyV: "MPhil Data Science, HKUST (GZ) · MA Cognitive Science, Edinburgh (First)",
     stats: [
       ["15–30 min", "script → finished 1-min episode"],
-      ["~90%", "agent outputs need no manual re-edit"],
+      ["~90%", "agent outputs ready for placement"],
       ["3.7×", "token waste an eval caught before shipping"],
       ["33", "hackathon & competition awards, 12 firsts"],
     ],
@@ -153,7 +153,7 @@ const T = {
     studyV: "香港科技大学（广州）数据科学 MPhil · 爱丁堡大学认知科学 MA（一等）",
     stats: [
       ["15–30 分钟", "剧本 → 1 分钟成片"],
-      ["~90%", "Agent 产出无需人工返工"],
+      ["~90%", "Agent 产出可直接投放交付"],
       ["3.7×", "上线前被评测拦下的 token 浪费"],
       ["33", "项黑客松与竞赛奖，12 个第一"],
     ],
