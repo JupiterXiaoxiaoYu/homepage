@@ -65,7 +65,7 @@ export const RESEARCH: Research[] = [
   {
     id: "sovereign-rag",
     title: "Sovereign RAG",
-    venue: "MPhil Thesis · HKUST",
+    venue: "Research project · HKUST",
     period: "2024 — 2026",
     summary:
       "Locality-aware, local-first retrieval over decentralized social networks. Designed a GMP (Generative Metapath Planning) query compiler and TAQ (Topology-Aware Quantization) index that exploit instance and community locality — retrieval that never leaves the graph it serves.",

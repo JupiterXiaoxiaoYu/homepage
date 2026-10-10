@@ -53,8 +53,8 @@ const CHAPTERS: {
   {
     key: "res", en: "Research Notes", zh: "研究手记", short: { en: "Research", zh: "研究" }, hash: "research", folio: "13", spread: 6,
     intro: {
-      en: "A first-author benchmark paper and the MPhil thesis — both about retrieval over social graphs that you can check.",
-      zh: "一篇一作基准论文与硕士论文——都关于社交图谱上可核验的检索。",
+      en: "A first-author benchmark paper and a retrieval research project — both about retrieval over social graphs that you can check.",
+      zh: "一篇一作基准论文与一个检索研究项目——都关于社交图谱上可核验的检索。",
     },
   },
   {
