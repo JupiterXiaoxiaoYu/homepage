@@ -13,7 +13,7 @@ export const PROFILE = {
     zh: "从 Agent 运行时到全栈产品，独立构建能上线的 AI 系统。",
   },
   zh: {
-    bio: "端到端构建可上线的 AI 系统的 Agent 工程师。现任唯西（AI 视频生产）Agent 工程师；曾任 Delphinus Lab（zkWASM）生态总监、Resona 创始人。香港科技大学（广州）数据科学 MPhil，爱丁堡大学认知科学本科。33 项黑客松与竞赛奖项。",
+    bio: "端到端构建可上线的 AI 系统的 Agent 工程师。现任北京唯西网络科技有限公司 Agent 工程师；曾任 Delphinus Lab（zkWASM）生态总监、Resona 创始人。香港科技大学（广州）数据科学 MPhil，爱丁堡大学认知科学本科。33 项黑客松与竞赛奖项。",
     tagline: "Agent 工程师 · 全栈 · 研究员",
   },
   email: "jupiterxiaoxiaoyu@gmail.com",
@@ -112,7 +112,7 @@ export type Work = {
   period: string;
   points: string[];
   current?: boolean;
-  zh?: { role?: string; points?: string[] };
+  zh?: { role?: string; org?: string; backing?: string; points?: string[] };
 };
 
 export const WORK: Work[] = [
@@ -131,6 +131,8 @@ export const WORK: Work[] = [
     ],
     zh: {
       role: "Agent 工程师",
+      org: "北京唯西网络科技有限公司",
+      backing: "AI 视频生产",
       points: [
         "四个内部 AI 视频生产产品的唯一工程师，从前端一直做到 Agent 运行时",
         "Agent 模式下 1 分钟成片从剧本到出片 15–30 分钟，约 90% 可直接投放和交付",
@@ -297,7 +299,7 @@ export const PROJECTS: Project[] = [
     links: [],
     zh: {
       name: "唯创 · AI 短剧工作台",
-      role: "Agent 工程师 · 唯西",
+      role: "Agent 工程师 · 北京唯西网络科技",
       summary: "AI 短剧与广告生产：打通“剧本 → 角色与场景 → 分镜 → 视频 → 配音、字幕与包装”全流程，可全自动出片，也可人工精修。",
       impact: "1 分钟成片 15–30 分钟 · 约 90% 可直接投放和交付 · 生产效率提升一倍",
       detail:
@@ -320,7 +322,7 @@ export const PROJECTS: Project[] = [
     links: [],
     zh: {
       name: "唯镜 Studio",
-      role: "Agent 工程师 · 唯西",
+      role: "Agent 工程师 · 北京唯西网络科技",
       summary: "把本地优先、单用户的开源 Agent 剪辑器 OpenChatCut 改造成多租户 SaaS，剪辑师和 Agent 在同一条时间线上协作。",
       impact: "多租户 SaaS · 多条产线共用一个平台",
       detail:
@@ -343,7 +345,7 @@ export const PROJECTS: Project[] = [
     links: [],
     zh: {
       name: "剧本多 Agent 工作室",
-      role: "Agent 工程师 · 唯西",
+      role: "Agent 工程师 · 北京唯西网络科技",
       summary: "小说改编剧集的多 Agent 写作流水线：6 个阶段、13 个角色 Agent，编剧逐阶段审批。",
       impact: "评测：专家协作多花 3.7 倍 token、质量无提升 → 不上线",
       detail:
@@ -434,7 +436,7 @@ export const PROJECTS: Project[] = [
     links: [],
     zh: {
       name: "唯西生产工具",
-      role: "Agent 工程师 · 唯西",
+      role: "Agent 工程师 · 北京唯西网络科技",
       summary: "围绕团队素材剪辑流水线的工具：把唯镜 Studio 的 AI 能力迁入流水线，开发无人值守上传工具，以及 GPU 视频打码流水线。",
       impact: "取代人工上传 · 打码速度为视频时长的 2 倍、准确率约 80%",
       detail:
@@ -457,7 +459,7 @@ export const PROJECTS: Project[] = [
     links: [],
     zh: {
       name: "唯灵创意引擎",
-      role: "Agent 工程师 · 唯西",
+      role: "Agent 工程师 · 北京唯西网络科技",
       summary: "面向短视频编导的创作工作台，基于两层内容本体，讲清一条参考视频为什么成立、其中哪些结构可以借用。",
       impact: "两层内容本体 · 14 组对照实验决定保留什么",
       detail:

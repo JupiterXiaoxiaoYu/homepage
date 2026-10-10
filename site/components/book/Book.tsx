@@ -148,7 +148,7 @@ const T = {
     now: "现在",
     before: "此前",
     study: "求学",
-    nowV: "唯西 Agent 工程师（全职）——为 AI 视频生产构建生产级 Agent 系统",
+    nowV: "北京唯西网络科技有限公司 Agent 工程师（全职）——为 AI 视频生产构建生产级 Agent 系统",
     beforeV: "Resona 创始人（浏览器 Agent）· Delphinus Lab 生态总监（zkWASM）",
     studyV: "香港科技大学（广州）数据科学 MPhil · 爱丁堡大学认知科学 MA（一等）",
     stats: [
@@ -677,7 +677,7 @@ export default function Book({ lang }: { lang: Lang }) {
                   <div className={`b-cv-row ${hl === wid || hl === w.id ? "hl" : ""}`} id={`ent-${wid}`}>
                     <span className="b-cv-p">{w.period.replace("now", t.ongoing)}</span>
                     <span className="b-cv-r">{wl.role}</span>
-                    <span className="b-cv-o">{w.org}{w.backing ? ` · ${w.backing}` : ""}</span>
+                    <span className="b-cv-o">{wl.org}{wl.backing ? ` · ${wl.backing}` : ""}</span>
                   </div>
                   <Slip id={wid} />
                   <Slip id={w.id} />
