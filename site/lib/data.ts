@@ -20,6 +20,7 @@ export const PROFILE = {
   github: "https://github.com/JupiterXiaoxiaoYu",
   linkedin: "https://www.linkedin.com/in/jupiter-yu-0a7052aa/",
   resume: `${BASE_PATH}/Xiaoxiao-YU-CV.pdf`,
+  resumeZh: `${BASE_PATH}/Xiaoxiao-YU-CV-zh.pdf`,
   location: "REMOTE / HK / UK",
   stats: [
     { k: "hackathon & competition awards", v: "33" },

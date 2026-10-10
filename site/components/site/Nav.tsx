@@ -40,7 +40,7 @@ export default function Nav({ lang, t }: { lang: Lang; t: UIStrings }) {
         </span>
         <a
           className="nav-link nav-resume"
-          href={PROFILE.resume}
+          href={lang === "zh" ? PROFILE.resumeZh : PROFILE.resume}
           target="_blank"
           rel="noreferrer"
         >

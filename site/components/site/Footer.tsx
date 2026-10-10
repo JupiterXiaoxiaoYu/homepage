@@ -33,7 +33,7 @@ export default function Footer({ lang, t }: { lang: Lang; t: UIStrings }) {
         <a href={PROFILE.linkedin} target="_blank" rel="noreferrer" className="nav-link">
           LinkedIn ↗
         </a>
-        <a href={PROFILE.resume} target="_blank" rel="noreferrer" className="nav-link">
+        <a href={lang === "zh" ? PROFILE.resumeZh : PROFILE.resume} target="_blank" rel="noreferrer" className="nav-link">
           {t.resume} ↗
         </a>
         <Link href="/play" className="nav-link">

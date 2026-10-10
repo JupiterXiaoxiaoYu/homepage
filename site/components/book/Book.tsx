@@ -452,7 +452,7 @@ export default function Book({ lang }: { lang: Lang }) {
             <div className="b-cta">
               <button className="b-btn b-btn-ink" onClick={() => go(1)}>{t.begin} →</button>
               <Link className="b-btn" href={`/${lang}/work`}>{t.allWork}</Link>
-              <a className="b-btn" href={PROFILE.resume} target="_blank" rel="noreferrer">{t.resume} ↗</a>
+              <a className="b-btn" href={lang === "zh" ? PROFILE.resumeZh : PROFILE.resume} target="_blank" rel="noreferrer">{t.resume} ↗</a>
               <a className="b-btn" href={`mailto:${PROFILE.email}`}>{t.email}</a>
             </div>
           </div>
@@ -702,7 +702,7 @@ export default function Book({ lang }: { lang: Lang }) {
             <li><a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a></li>
             <li><a href={PROFILE.github} target="_blank" rel="noreferrer">github.com/JupiterXiaoxiaoYu</a></li>
             <li><a href={PROFILE.linkedin} target="_blank" rel="noreferrer">linkedin/in/jupiter-yu</a></li>
-            <li><a href={PROFILE.resume} target="_blank" rel="noreferrer">résumé.pdf</a></li>
+            <li><a href={lang === "zh" ? PROFILE.resumeZh : PROFILE.resume} target="_blank" rel="noreferrer">résumé.pdf</a></li>
           </ul>
           <p className="b-end">{t.end} ❦</p>
           <div className="b-folio">{folio("18", 18)}</div>
@@ -802,7 +802,7 @@ export default function Book({ lang }: { lang: Lang }) {
         <nav>
           <span className="b-hintline">{t.hint}</span>
           <Link href={`/${lang}/work`}>{t.work}</Link>
-          <a href={PROFILE.resume} target="_blank" rel="noreferrer">{t.resume}</a>
+          <a href={lang === "zh" ? PROFILE.resumeZh : PROFILE.resume} target="_blank" rel="noreferrer">{t.resume}</a>
           <Link href={lang === "zh" ? "/en" : "/zh"}>
             {lang === "zh" ? "EN" : "中文"}
           </Link>
